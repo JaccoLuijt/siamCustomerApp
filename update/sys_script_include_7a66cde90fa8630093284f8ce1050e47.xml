@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_122630_kpn_siam.kpnSiamUtils</api_name>
+        <client_callable>false</client_callable>
+        <description>KPN SIAM Script Includes</description>
+        <name>kpnSiamUtils</name>
+        <script><![CDATA[var kpnSiamUtils = Class.create();
+kpnSiamUtils.prototype = {
+	initialize: function() {
+	},
+	
+	syncCatalogItems: function() {
+		// Obtain the URL for the SIAM Instance
+		var siamURL = this._createURL(); 
+		
+		// Get the catalog sysID from the SIAM Instance
+		var siamCatalog = gs.getProperty('x_122630_kpn_siam.kpn.siam.catalog.sysid');
+		// Get the category sysID from the SIAM Instance
+		var siamCategory = gs.getProperty('x_122630_kpn_siam.kpn.siam.catalog.category.sysid');
+		
+		// Get the list of catalog items
+		rm = new sn_ws.RESTMessageV2('KPN Catalog Items', 'get_catalog_item');
+		rm.setEndpoint(siamUrl);
+		// rm.setQueryParameter("sysparm_query","sysparm_catalog="+siamCatalog+",sysparm_category="+siamCategory);
+		rm.setQueryParameter("sysparm_query","sysparm_catalog="+siamCatalog);
+		
+		// Execute the API call
+		var syncResponse = rm.execute();
+		
+		// If Catalog Items have been received check whether they exist in this ServiceNow environment
+		if (!syncResponse.haveError()) {
+			var items = JSON.parse(syncResponse.getBody());
+			
+			for (var i=0; i < items.result.length; i++) {
+				var element = items.result[i];
+				
+				// Determine whether the catalog item already exists using the catalog item name
+				var catItem = this._catItemExists(element.name,siamCatalog); 
+				
+				if (catItem.sys_id == "") {
+					// Create a new catalog item using the sys_id from the SIAM instance 
+					this._createCatItem(element.sys_id,siamCatalog,siamCategory); 
+				} else {
+					// Update the catalog item using the data from the SIAM Instance (if any changes have been made)
+					this._updateCatItem(element.sys_id); 
+				}
+			}
+		}
+		
+		return syncResponse.getBody();
+	},
+
+	_createURL: function() {
+		// Get the URL property
+		var siamUrl = gs.getProperty('x_122630_kpn_siam.kpn.siam.base.url');
+		// Complete with the catalog API
+		siamUrl += '/api/sn_sc/servicecatalog/items';
+		
+		return siamUrl; 
+	}, 
+	
+	_catItemExists: function(itemName,siamCatalog) {
+		var checkItem = new GlideRecord('sc_cat_item'); 
+		var returnId; 
+		
+		checkItem.addQuery('name',itemName);
+		checkItem.addQuery('catalogs','CONTAINS',siamCatalog); // Only check for the SIAM items 
+		checkItem.query(); 
+		if (checkItem.next()) {
+			returnId = checkItem.sys_id; 
+		}
+		
+		return returnId; 
+	},
+	
+	_createCatItem: function(siamItemId,siamCatalog,siamCategory) {
+		var returnId;
+		
+		return returnId;
+	},
+
+	_updateCatItem: function(siamItemId) {
+		var response;
+		
+		return response;
+	},
+
+	type: 'kpnSiamUtils'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-09-14 12:20:37</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>7a66cde90fa8630093284f8ce1050e47</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>kpnSiamUtils</sys_name>
+        <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
+        <sys_update_name>sys_script_include_7a66cde90fa8630093284f8ce1050e47</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-09-17 15:00:26</sys_updated_on>
+    </sys_script_include>
+</record_update>
