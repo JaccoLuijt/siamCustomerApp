@@ -6,7 +6,7 @@
         <content_page/>
         <device_type/>
         <filter table="sc_cat_item">active=true^category=b73061ed0fe8630093284f8ce1050e07^EQ<item endquery="false" field="active" goto="false" newquery="false" operator="=" or="false" value="true"/>
-            <item display_table="sc_category" display_value="SIAM Automated Request" endquery="false" field="category" goto="false" newquery="false" operator="=" or="false" value="b73061ed0fe8630093284f8ce1050e07"/>
+            <item display_table="sc_category" display_value="KPN SIAM Automated Request" endquery="false" field="category" goto="false" newquery="false" operator="=" or="false" value="b73061ed0fe8630093284f8ce1050e07"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </filter>
         <hint/>

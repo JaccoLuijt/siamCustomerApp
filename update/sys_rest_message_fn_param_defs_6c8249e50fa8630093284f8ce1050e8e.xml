@@ -2,7 +2,7 @@
     <sys_rest_message_fn_param_defs action="INSERT_OR_UPDATE">
         <name>sysparm_limit</name>
         <order>50</order>
-        <rest_message_function display_value="get_catalog_item">450085ed0f64630093284f8ce1050e3a</rest_message_function>
+        <rest_message_function display_value="get_catalog_items">450085ed0f64630093284f8ce1050e3a</rest_message_function>
         <sys_class_name>sys_rest_message_fn_param_defs</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-09-14 11:49:43</sys_created_on>
