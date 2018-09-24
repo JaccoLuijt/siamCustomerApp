@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn_param_defs">
     <sys_rest_message_fn_param_defs action="INSERT_OR_UPDATE">
-        <name>sysparm_catalog</name>
-        <order>100</order>
+        <name>sysparm_category</name>
+        <order>200</order>
         <rest_message_function display_value="get_catalog_items">450085ed0f64630093284f8ce1050e3a</rest_message_function>
         <sys_class_name>sys_rest_message_fn_param_defs</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-09-14 11:49:43</sys_created_on>
+        <sys_created_on>2018-09-20 10:55:22</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>e6e001290fa8630093284f8ce1050ef6</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_name>sysparm_catalog</sys_name>
+        <sys_id>ee3f2f170f20630093284f8ce1050e09</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>sysparm_category</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
-        <sys_update_name>sys_rest_message_fn_param_defs_e6e001290fa8630093284f8ce1050ef6</sys_update_name>
+        <sys_update_name>sys_rest_message_fn_param_defs_ee3f2f170f20630093284f8ce1050e09</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2018-09-20 11:15:08</sys_updated_on>
-        <value>e0d08b13c3330100c8b837659bba8fb4</value>
+        <value>15e9eb13db6c6f40f448d3ca4b961943</value>
     </sys_rest_message_fn_param_defs>
 </record_update>

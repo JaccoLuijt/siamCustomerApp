@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_category">
     <sc_cat_item_category action="INSERT_OR_UPDATE">
-        <sc_cat_item display_value="710.091 - Remove virtual windows server">2cc37e830fe0230093284f8ce1050ef8</sc_cat_item>
+        <sc_cat_item display_value="CLD SIAM Test Catalog Item">232889770fac630093284f8ce1050e11</sc_cat_item>
         <sc_category display_value="Automated SIAM Items">148364fa0f6c270093284f8ce1050eae</sc_category>
         <sys_class_name>sc_cat_item_category</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-09-19 11:54:42</sys_created_on>
+        <sys_created_on>2018-09-21 12:00:08</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>2cc3f6470fe0230093284f8ce1050e26</sys_id>
+        <sys_id>e32889770fac630093284f8ce1050e7e</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Automated SIAM Items.710.091 - Remove virtual windows server</sys_name>
+        <sys_name>Automated SIAM Items.CLD SIAM Test Catalog Item</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
-        <sys_update_name>sc_cat_item_category_2cc3f6470fe0230093284f8ce1050e26</sys_update_name>
+        <sys_update_name>sc_cat_item_category_e32889770fac630093284f8ce1050e7e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-19 11:54:42</sys_updated_on>
+        <sys_updated_on>2018-09-21 12:00:08</sys_updated_on>
     </sc_cat_item_category>
 </record_update>
