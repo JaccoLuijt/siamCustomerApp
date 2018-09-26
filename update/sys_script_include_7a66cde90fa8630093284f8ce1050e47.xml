@@ -94,11 +94,12 @@ kpnSiamUtils.prototype = {
 				var element = items.result[i];
 				if (debug) {gs.info('5. element:'+JSON.stringify(element));
 				}
-				
-				// Determine whether the catalog item already exists using the catalog item name
-				var catItem = this._catItemExists(element.name,siamCatalog);
-				// And get the full definition of the catalog item from the SIAM Instance
+
+				// Get the full definition of the catalog item from the SIAM Instance
 				var siamItem = this._getSiamItem(element.sys_id,siamUrl);
+
+				// and determine whether the catalog item already exists using the catalog item name
+				var catItem = this._catItemExists(element.sys_id,siamCatalog);
 				
 				if (debug) {
 					gs.info('6. catItem:'+catItem);
@@ -111,7 +112,6 @@ kpnSiamUtils.prototype = {
 					
 					// Create a new catalog item using the sys_id from the SIAM instance
 					var custItemId = this._createCatItem(siamItem,siamUrl);
-					this._createCatItemLink(siamItem.sys_id,custItemId);
 				} else {
 					if (debug) {gs.info('8. Update existing Catalog Item');
 					}
@@ -132,12 +132,11 @@ kpnSiamUtils.prototype = {
 		return siamUrl;
 	},
 	
-	_catItemExists: function(itemName,siamCatalog) {
-		var checkItem = new GlideRecord('sc_cat_item');
+	_catItemExists: function(itemSysid,siamCatalog) {
 		var returnId;
+		var checkItem = new GlideRecord('sc_cat_item');
 		
-		checkItem.addQuery('name',itemName);
-		checkItem.addQuery('sc_catalogs','CONTAINS',siamCatalog); // Only check for the SIAM items
+		checkItem.addQuery('sys_id',itemSysid);
 		checkItem.query();
 		if (checkItem.next()) {
 			returnId = checkItem.sys_id;
@@ -198,7 +197,8 @@ kpnSiamUtils.prototype = {
 			if (debug){gs.info('10. catItem:'+catItem);
 			}
 			
-			// Store the information
+			// Store the information using the sys_id from the SIAM Instance
+			catItem.setNewGuidValue(siamItem.sys_id); 
 			catItemId = catItem.insert();
 			
 			// Now loop through the variables
@@ -216,6 +216,7 @@ kpnSiamUtils.prototype = {
 				itemVariable = this._fillVariable(itemVariable,catItemId,siamVariable);
 				
 				// Store the information
+			
 				var itemId = itemVariable.insert();
 				
 				// TBD Now store the choices for this variable ###
@@ -228,17 +229,7 @@ kpnSiamUtils.prototype = {
 			return catItemId;
 		},
 	
-	_createCatItemLink: function(siamSysId,custItemId) {
-		// Create the relationship between the internal catalog ID and the sys ID in the SIAM instance
-		var catItemLink = new GlideRecord('x_122630_kpn_siam_catalog_item_link'); 
-		catItemLink.initialize(); 
-		catItemLink.catalog_item = custItemId; 
-		catItemLink.siam_catalog_item_sys_id = siamSysId; 
-		var catItemLinkId = catItemLink.insert();
-		
-		return catItemLinkId; 
-	},
-		
+	
 		_updateCatItem: function(siamItem,custItemId,siamUrl) {
 			// Obtain the Catalog Item from the customer instance
 			var custItem = new GlideRecord('sc_cat_item');
@@ -293,7 +284,7 @@ kpnSiamUtils.prototype = {
         <sys_created_on>2018-09-14 12:20:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>7a66cde90fa8630093284f8ce1050e47</sys_id>
-        <sys_mod_count>66</sys_mod_count>
+        <sys_mod_count>67</sys_mod_count>
         <sys_name>kpnSiamUtils</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy>read</sys_policy>
@@ -301,6 +292,6 @@ kpnSiamUtils.prototype = {
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_script_include_7a66cde90fa8630093284f8ce1050e47</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-20 13:16:01</sys_updated_on>
+        <sys_updated_on>2018-09-26 12:06:23</sys_updated_on>
     </sys_script_include>
 </record_update>
