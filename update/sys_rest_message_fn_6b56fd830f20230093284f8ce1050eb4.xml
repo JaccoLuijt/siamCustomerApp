@@ -10,9 +10,9 @@
         <lock>false</lock>
         <oauth2_profile/>
         <protocol_name/>
-        <qualified_name>KPN Catalog Items [ get_catalog_item ]</qualified_name>
+        <qualified_name>SIAM Catalog Items [ get_catalog_item ]</qualified_name>
         <rest_endpoint>https://nsservicenowsbx.service-now.com/api/sn_sc/servicecatalog/items/</rest_endpoint>
-        <rest_message display_value="KPN Catalog Items">e2de3ca50fa8630093284f8ce1050e52</rest_message>
+        <rest_message display_value="SIAM Catalog Items">e2de3ca50fa8630093284f8ce1050e52</rest_message>
         <sys_class_name>sys_rest_message_fn</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-09-19 07:28:13</sys_created_on>

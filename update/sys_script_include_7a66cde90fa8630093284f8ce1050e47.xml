@@ -21,6 +21,7 @@ kpnSiamUtils.prototype = {
 		// to the SIAM instance. Once the information is send the SIAM instance
 		// will update the state of the current record
 		var debug = true;
+		
 		// Get the URL property
 		var siamUrl = gs.getProperty('x_122630_kpn_siam.kpn.siam.base.url');
 		if (debug) {gs.info('1. Base URL:'+siamUrl);
@@ -41,7 +42,7 @@ kpnSiamUtils.prototype = {
 		// TBD fill the variables
 		
 		// TBD Post the request to the SIAM instance
-		rm = new sn_ws.RESTMessageV2('KPN Catalog Items', 'post_request');
+		rm = new sn_ws.RESTMessageV2('SIAM Catalog Items', 'post_request');
 		rm.setEndpoint(postUrl);
 		
 		// Execute the API call
@@ -70,7 +71,7 @@ kpnSiamUtils.prototype = {
 		}
 		
 		// Get the list of catalog items
-		var restMessage = new sn_ws.RESTMessageV2('KPN Catalog Items', 'get_catalog_items');
+		var restMessage = new sn_ws.RESTMessageV2('SIAM Catalog Items', 'get_catalog_items');
 		restMessage.setEndpoint(catalogUrl);
 		restMessage.setStringParameter('sysparm_catalog',siamCatalog);
 		restMessage.setStringParameter('sysparm_category',siamCategory);
@@ -153,7 +154,7 @@ kpnSiamUtils.prototype = {
 			itemUrl += '/api/sn_sc/servicecatalog/items/';
 			itemUrl += itemSysid;
 			
-			rm = new sn_ws.RESTMessageV2('KPN Catalog Items', 'get_catalog_item');
+			rm = new sn_ws.RESTMessageV2('SIAM Catalog Items', 'get_catalog_item');
 			rm.setEndpoint(itemUrl);
 			
 			// Execute the API call
@@ -208,18 +209,28 @@ kpnSiamUtils.prototype = {
 				gs.info('11. var0:'+siamItem.variables[0]);
 			}
 			for (var vIdx=0;vIdx < siamItem.variables.length;vIdx++) {
-				var siamVariable = siamItem.variables[vIdx];
 				
-				// TBD determine whether this is the correct table ###
+				var siamVariableSysid = siamItem.variables[vIdx].id;
+				var siamVariable = this._getSiamVariable(siamVariableSysid,siamUrl); 
+				
+				// Fill the variable in the Item_option_new table
 				var itemVariable = new GlideRecord('item_option_new');
 				itemVariable.initialize();
 				itemVariable = this._fillVariable(itemVariable,catItemId,siamVariable);
 				
 				// Store the information
-			
-				var itemId = itemVariable.insert();
+				var itemVarId = itemVariable.insert();
 				
-				// TBD Now store the choices for this variable ###
+				//If choices exist for this variable 
+				// store the choices for this variable
+				if (siamItem.variables[vIdx].choices.length > 0) {
+					for (var cIdx=0;cIdx < siamItem.variables[vIdx].choices.length();cIdx++) {
+						var itemVarChoice = new GlideRecord('question_choice');
+						var siamVarChoice = siamItem.variables[vIdx].choices[cIdx];
+						itemVarChoice = this._fillVariableChoice(itemVarId,siamVarChoice);
+						itemVarChoice.insert(); 
+					}
+				}
 			}
 			
 			// Do the same for UI Policies
@@ -257,6 +268,40 @@ kpnSiamUtils.prototype = {
 			return catItem;
 		},
 		
+		_getSiamVariable: function(siamSysId,baseUrl) {
+			var debug = true;
+			var siamVariable = {}; 
+			
+			// Get the variable from the SIAM instance using the webservice
+			var varUrl = baseUrl;
+			varUrl += '/api/now/table/'; // go to the table containing the variables
+			varUrl += 'item_option_new'; 
+						
+			rm = new sn_ws.RESTMessageV2('SIAM ServiceNow Table', 'get_table_entry'); // ###
+			rm.setStringParameter('sys_id',siamSysId);
+			rm.setEndpoint(varUrl);
+			
+			// Execute the API call
+			var varResponse = rm.execute();
+			if (debug) {
+				gs.info('11a. varResponse:'+varResponse.getErrorCode());
+				gs.info('11a. varResponse:'+varResponse.getErrorMessage());
+				gs.info('11a. varResponse:'+varResponse.getBody());
+			}
+			
+			// If Catalog Items have been received withoout errors
+			// check whether they exist in this ServiceNow environment
+			if (!varResponse.haveError()) {
+				var	resultObject = JSON.parse(varResponse.getBody());
+				siamVariable = resultObject.result;
+			}
+			
+			var returnVariable = siamVariable; 
+			
+			// return the variable
+			return returnVariable; 
+		}, 
+	
 		_fillVariable: function(itemVariable,catItemId,siamVariable) {
 			// Link to the Catalog Item
 			itemVariable.cat_item = catItemId;
@@ -284,7 +329,7 @@ kpnSiamUtils.prototype = {
         <sys_created_on>2018-09-14 12:20:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>7a66cde90fa8630093284f8ce1050e47</sys_id>
-        <sys_mod_count>67</sys_mod_count>
+        <sys_mod_count>71</sys_mod_count>
         <sys_name>kpnSiamUtils</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy>read</sys_policy>
@@ -292,6 +337,6 @@ kpnSiamUtils.prototype = {
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_script_include_7a66cde90fa8630093284f8ce1050e47</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-26 12:06:23</sys_updated_on>
+        <sys_updated_on>2018-09-27 13:51:20</sys_updated_on>
     </sys_script_include>
 </record_update>
