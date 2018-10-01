@@ -7,14 +7,17 @@
         <description>KPN SIAM Script Includes&#13;
 &#13;
 Make sure the following tables have cross scope access enabled: &#13;
-- sc_cat_item (create &amp; update)&#13;
+- sc_cat_item (CRUD)&#13;
+- sc_item_option_new (CRUD)&#13;
+- catalog_ui_policy (CRUD)&#13;
+- catalog_ui_policy_action&#13;
 - etc.</description>
         <name>kpnSiamUtils</name>
         <script><![CDATA[var kpnSiamUtils = Class.create();
 kpnSiamUtils.prototype = {
 	initialize: function() {
-		
 	},
+
 	sendSiamRequest: function(requestedItem) {
 		// TBD
 		// This function sends the information from the current requested Item
@@ -27,7 +30,7 @@ kpnSiamUtils.prototype = {
 		
 		// Obtain the URL for the SIAM Instance
 		var postUrl = this._createPostURL(siamUrl);
-
+		
 		// Get the catalog sysID from the SIAM Instance
 		var siamCatalog = gs.getProperty('x_122630_kpn_siam.kpn.siam.source.catalog.sysid');
 		
@@ -46,7 +49,6 @@ kpnSiamUtils.prototype = {
 	},
 	
 	syncCatalogItems: function() {
-		var debug = true;
 		// Get the URL property
 		var siamUrl = gs.getProperty('x_122630_kpn_siam.kpn.siam.base.url');
 		
@@ -58,7 +60,7 @@ kpnSiamUtils.prototype = {
 		// Get the category sysID from the SIAM Instance
 		var siamCategory = gs.getProperty('x_122630_kpn_siam.kpn.siam.source.catalog.category.sysid');
 		
-		// Get the list of catalog items
+		// Get the list of valid catalog items
 		var restMessage = new sn_ws.RESTMessageV2('SIAM Catalog Items', 'get_catalog_items');
 		restMessage.setEndpoint(catalogUrl);
 		restMessage.setStringParameter('sysparm_catalog',siamCatalog);
@@ -82,16 +84,17 @@ kpnSiamUtils.prototype = {
 				var catItem = this._catItemExists(element.sys_id,siamCatalog);
 				
 				if (!catItem) {
-					if (debug) {gs.info('7. Create a new Catalog Item');
-					}
 					// Create a new catalog item using the sys_id from the SIAM instance
-					var custItemId = this._createCatItem(siamItem,siamUrl);
+					var custItemId = this._storeCatItem(siamItem,siamUrl);
+					
+					// Use the Customer Catalog Item sys_id to create the additional tables for this catalog item
+					this._storeCatItemVar(siamItem,siamUrl,custItemId);
+					this._storeCatItemUiPolicy(siamItem,siamUrl,custItemId);
+					this._storeCatItemScript(siamItem,siamUrl,custItemId);
 				} else {
-					if (debug) {gs.info('8. Update existing Catalog Item');
-					}
 					// Update the catalog item using the data from the SIAM Instance
 					// (if any changes have been made)
-					var siamItemFull = this._getFullSiamItem(siamItem);
+					var siamItemFull = this._getFullSiamItem(element.sys_id,siamUrl);
 					this._updateCatItem(siamItemFull,catItem,siamUrl);
 				}
 			}
@@ -120,32 +123,7 @@ kpnSiamUtils.prototype = {
 		return returnId;
 	},
 	
-	_getSiamItem: function(itemSysid,baseUrl) {
-		var debug=true;
-		var siamItem = {
-		};
-		
-		var itemUrl = baseUrl;
-		itemUrl += '/api/sn_sc/servicecatalog/items/';
-		itemUrl += itemSysid;
-		
-		rm = new sn_ws.RESTMessageV2('SIAM Catalog Items', 'get_catalog_item');
-		rm.setEndpoint(itemUrl);
-		
-		// Execute the API call
-		var itemResponse = rm.execute();
-		
-		// If Catalog Items have been received withoout errors
-		// check whether they exist in this ServiceNow environment
-		if (!itemResponse.haveError()) {
-			var	resultObject = JSON.parse(itemResponse.getBody());
-			siamItem = resultObject.result;
-		}
-		return siamItem;
-	},
-	
-	_createCatItem: function(siamItem,siamUrl) {
-		var debug=true;
+	_storeCatItem: function(siamItem,siamUrl) {
 		var catItemId;
 		
 		// Obtain the Customer Catalog and Catalog Category from the properties
@@ -165,22 +143,20 @@ kpnSiamUtils.prototype = {
 		catItem.setNewGuidValue(siamItem.sys_id);
 		catItemId = catItem.insert();
 		
-		// Now loop through the variables for this item
+		return catItemId;
+	},
+	
+	_storeCatItemVar: function(siamItem,siamUrl,catItemId) {
+		// Loop through the variables for this item
 		// and store the variables
 		for (var vIdx=0;vIdx < siamItem.variables.length;vIdx++) {
 			var siamVariableSysid = siamItem.variables[vIdx].id;
-			if (debug) {gs.info('11a. sysid:'+siamVariableSysid);
-			}
 			var siamVariable = this._getSiamVariable(siamVariableSysid,siamUrl);
 			
 			// Fill the variable in the Item_option_new table
 			var itemVariable = new GlideRecord('item_option_new');
 			itemVariable.initialize();
 			itemVariable = this._fillVariable(itemVariable,catItemId,siamVariable);
-			if (debug) {
-				gs.info('12. question:'+itemVariable.question_text);
-				gs.info('12. question:'+siamVariable.question_text);
-			}
 			
 			// Store the information
 			var itemVarId = itemVariable.insert();
@@ -203,33 +179,212 @@ kpnSiamUtils.prototype = {
 				}
 			}
 		}
-		
-		// Do the same for UI Policies
-		
-		// Do the same for Client Scipts
-		return catItemId;
 	},
 	
+	_storeCatItemUiPolicy: function(siamItem,siamUrl,catItemId) {
+		// Do the same for UI Policies & their actions
+		for (var pIdx=0;pIdx < siamItem.ui_policy.length;pIdx++) {
+			var siamPolicySysid = siamItem.ui_policy[pIdx].sys_id;
+			var siamPolicy = this._getSiamPolicy(siamPolicySysid,siamUrl);
+			
+			// Fill the variable in the Item_option_new table
+			var itemPolicy = new GlideRecord('catalog_ui_policy');
+			itemPolicy.initialize();
+			itemPolicy = this._fillPolicy(itemPolicy,catItemId,siamPolicy);
+			
+			// Store the information
+			var itemPolicyId = itemPolicy.insert();
+			
+			if (siamItem.ui_policy[pIdx].actions) {
+				// If actions exist for this policy
+				// store the actions for this policy
+				if (siamItem.ui_policy[pIdx].actions.length > 0) {
+					for (var aIdx=0;aIdx < siamItem.ui_policy[pIdx].actions.length;aIdx++) {
+						var siamPolicyAction = siamItem.ui_policy[pIdx].actions[aIdx];
+						
+						// Initialize the action
+						var itemPolicyAction = new GlideRecord('catalog_ui_policy_action');
+						itemPolicyAction.initialize();
+						
+						// Fill the record
+						itemPolicyAction = this._fillPolicyAction(itemPolicyAction,catItemId,siamPolicyAction);
+						itemPolicyAction.insert();
+					}
+				}
+			}
+		}
+	},
+	
+	_storeCatItemScript: function(siamItem,siamUrl,catItemId) {
+		// Do the same for Client Scipts
+		var sIdx = 0; 
+		
+		if (siamItem.client_script.onChange.length > -1 ) {
+			// Loop through the client scripts for this item
+			// and store the scripts
+			for (sIdx=0;sIdx < siamItem.client_script.onChange.length;sIdx++) {
+				this._storeCatItemScriptRecord(siamItem.onChange[sIdx].sys_id,siamUrl,'onChange'); 
+			}
+		}
+		
+		if (siamItem.client_script.onSubmit.length > -1) {
+			// Loop through the client scripts for this item
+			// and store the scripts
+			for (sIdx=0;sIdx < siamItem.client_script.onSubmit.length;sIdx++) {
+				this._storeCatItemScriptRecord(siamItem.onSubmit[sIdx].sys_id,siamUrl,'onSubmit'); 
+			}
+		}
+		
+		if (siamItem.client_script.onLoad.length > -1) {
+			// Loop through the client scripts for this item
+			// and store the scripts
+			for (sIdx=0;sIdx < siamItem.client_script.onLoad.length;sIdx++) {
+				this._storeCatItemScriptRecord(siamItem.onLoad[sIdx].sys_id,siamUrl,'onLoad'); 
+			}
+		}
+	},
+
+	_storeCatItemScriptRecord: function(sys_id,siamUrl,scriptType) {
+		var siamScript = this._getSiamScript(sys_id,siamUrl);
+		// Fill the variable in the Item_option_new table
+		var itemScript = new GlideRecord('sys_script_client');
+		itemScript.initialize();
+		itemScript = this._fillScript(itemScript,catItemId,siamScript,scriptType);
+				
+		// Store the information
+		itemScript.insert();
+	}, 
+	
 	_updateCatItem: function(siamItem,custItemId,siamUrl) {
-		var debug = true;
 		// Obtain the Catalog Item from the customer instance
 		var custItem = new GlideRecord('sc_cat_item');
 		custItem.get(custItemId);
 		
 		// determine whether changes have been made in the SIAM Instance
 		if (this._itemChanged(custItem,siamItem)) {
-			if (debug) {gs.info('UPDATE required');
-			}
 			// An update has been recognized in the SIAM instance
 			// update the customer instance with the changes
 			custItem = this._fillCatItem(custItem,siamItem,"","","");
 			
 			// Update the catalog item in this environment
 			custItem.update();
-		} else {
-			if (debug) {gs.info('NO UPDATE required');
+		}
+		
+		// Now loop through the variables for this item
+		// and update the variables (if required)
+		for (var vIdx=0;vIdx < siamItem.variables.length;vIdx++) {
+			var siamVariableSysid = siamItem.variables[vIdx].id;
+			var siamVariable = this._getSiamVariable(siamVariableSysid,siamUrl);
+			
+			// Fill the variable in the Item_option_new table
+			var itemVariable = new GlideRecord('item_option_new');
+			itemVariable.initialize();
+			itemVariable = this._fillVariable(itemVariable,catItemId,siamVariable);
+			
+			// Store the information
+			var itemVarId = itemVariable.insert();
+			
+			if (siamItem.variables[vIdx].choices) {
+				// If choices exist for this variable
+				// store the choices for this variable
+				if (siamItem.variables[vIdx].choices.length > 0) {
+					for (var cIdx=0;cIdx < siamItem.variables[vIdx].choices.length;cIdx++) {
+						var siamVarChoice = siamItem.variables[vIdx].choices[cIdx];
+						
+						// Initialize the choice
+						var itemVarChoice = new GlideRecord('question_choice');
+						itemVarChoice.initialize();
+						
+						// Fill the record
+						itemVarChoice = this._fillVariableChoice(itemVarChoice,itemVarId,siamVarChoice);
+						itemVarChoice.insert();
+					}
+				}
 			}
-		}		
+		}
+	},
+	
+	_itemChanged: function(custItem,siamItem) {
+		// Check whether the SIAM catalog item is newer then
+		// the last update of the customer catalog item
+		var returnAnswer = false;
+		var siamDate = new GlideDateTime(siamItem.sys_updated_on);
+		var custDate = new GlideDateTime(custItem.sys_updated_on);
+		if (siamDate > custDate) {
+			returnAnswer = true;
+		}
+		return returnAnswer;
+	},
+	
+	_getSiamItem: function(itemSysid,baseUrl) {
+		var siamItem = {
+		};
+		
+		var itemUrl = baseUrl;
+		itemUrl += '/api/sn_sc/servicecatalog/items/';
+		itemUrl += itemSysid;
+		
+		rm = new sn_ws.RESTMessageV2('SIAM Catalog Items', 'get_catalog_item');
+		rm.setEndpoint(itemUrl);
+		
+		// Execute the API call
+		var itemResponse = rm.execute();
+		
+		// If Catalog Items have been received withoout errors
+		// check whether they exist in this ServiceNow environment
+		if (!itemResponse.haveError()) {
+			var	resultObject = JSON.parse(itemResponse.getBody());
+			siamItem = resultObject.result;
+		}
+		return siamItem;
+	},
+	
+	_getFullSiamItem: function(itemSysid,baseUrl) {
+		var siamItem = this._getSiamObject(baseUrl,'sc_cat_item',itemSysid);
+		return siamItem;
+	},
+	
+	_getSiamVariable: function(siamSysId,baseUrl) {
+		var siamVariable = this._getSiamObject(baseUrl,'item_option_new',siamSysId);
+		return siamVariable;
+	},
+	
+	_getSiamPolicy: function(siamPolicySysId,baseUrl) {
+		var siamPolicy = this._getSiamObject(baseUrl,'catalog_ui_policy',siamPolicySysId);
+		return siamPolicy;
+	},
+	
+	_getSiamPolicyAction: function(siamActionSysId,baseUrl) {
+		var siamPolicyAction = this._getSiamObject(baseUrl,'catalog_ui_policy_action',siamActionSysId);
+		return siamPolicyAction;
+	},
+	
+	_getSiamScript: function(siamScriptSysId,baseUrl) {
+		var siamScript = this._getSiamObject(baseUrl,'sys_script_client',siamScriptSysId);
+		return siamScript;
+	},
+	
+	_getSiamObject: function(baseUrl,table,sys_id) {
+		var siamObject = {
+		};
+		// Get the record from the SIAM instance using the webservice
+		var siamUrl = baseUrl;
+		siamUrl += '/api/now/table/' + table + '/' + sys_id;
+		
+		rm = new sn_ws.RESTMessageV2('SIAM ServiceNow Table', 'get_table_entry');
+		rm.setEndpoint(siamUrl);
+		
+		// Execute the API call
+		var varResponse = rm.execute();
+		
+		// If the message has been received withoout errors
+		// parse the JSON into an object and return the object
+		if (!varResponse.haveError()) {
+			var	resultObject = JSON.parse(varResponse.getBody());
+			siamObject = resultObject.result;
+		}
+		
+		return siamObject;
 	},
 	
 	_fillCatItem: function(catItem,siamItem,custCatalog,custCategory,custWorkflow) {
@@ -237,10 +392,14 @@ kpnSiamUtils.prototype = {
 		catItem.name = siamItem.name;
 		catItem.short_description = siamItem.short_description;
 		catItem.description = siamItem.description;
+		catItem.price = siamItem.price; 
 		catItem.show_price = siamItem.show_price;
 		catItem.show_quantity = siamItem.show_quantity;
 		catItem.order = siamItem.order;
+		catItem.picture = siamItem.picture;
+		catItem.icon = siamItem.icon;
 		
+		// Only fill these fields with the initial call(create)
 		if (custCatalog != '') {
 			catItem.sc_catalogs = custCatalog;
 		}
@@ -254,52 +413,11 @@ kpnSiamUtils.prototype = {
 		return catItem;
 	},
 	
-	_itemChanged: function(custItem,siamItem) {
-		// Check whether the siam catalog item is newer then
-		// the last update of the customer catalog item
-		var returnAnswer = false;
-		//gs.info('siam.updated:'+siamItem.sys_updated_on);
-		//gs.info('cust.updated:'+custItem.sys_updated_on);
-		//if (siamItem.sys_updated_on.getNumericValue() > custItem.sys_updated_on.getNumericValue()) {
-			returnAnswer = true;
-		//}
-		
-		return returnAnswer;
-	},
-	
-	_getSiamVariable: function(siamSysId,baseUrl) {
-		var debug = true;
-		var siamVariable = {
-		};
-		
-		// Get the variable from the SIAM instance using the webservice
-		var varUrl = baseUrl;
-		varUrl += '/api/now/table/'; // go to the table containing the variables
-		varUrl += 'item_option_new/';
-		varUrl += siamSysId;
-		
-		rm = new sn_ws.RESTMessageV2('SIAM ServiceNow Table', 'get_table_entry');
-		rm.setEndpoint(varUrl);
-		
-		// Execute the API call
-		var varResponse = rm.execute();
-		
-		// If Catalog Items have been received withoout errors
-		// check whether they exist in this ServiceNow environment
-		if (!varResponse.haveError()) {
-			var	resultObject = JSON.parse(varResponse.getBody());
-			siamVariable = resultObject.result;
-		}
-		
-		var returnVariable = siamVariable;
-		
-		// return the variable
-		return returnVariable;
-	},
-	
 	_fillVariable: function(itemVariable,catItemId,siamVariable) {
 		// Link to the Catalog Item
 		itemVariable.cat_item = catItemId;
+		
+		// Now fill the other fields
 		itemVariable.type = siamVariable.type;
 		itemVariable.active = siamVariable.active;
 		itemVariable.question_text = siamVariable.question_text;
@@ -325,6 +443,7 @@ kpnSiamUtils.prototype = {
 	_fillVariableChoice: function(itemVarChoice,varId,siamVarChoice) {
 		// Link to the Catalog Variable
 		itemVarChoice.question = varId;
+		
 		itemVarChoice.order = siamVarChoice.index;
 		itemVarChoice.misc = siamVarChoice.price;
 		itemVarChoice.rec_misc = siamVarChoice.recurring_price;
@@ -334,6 +453,58 @@ kpnSiamUtils.prototype = {
 		return itemVarChoice;
 	},
 	
+	_fillPolicy: function(itemPolicy,catItemId,siamPolicy) {
+		// Link to the Catalog Item
+		itemPolicy.catalog_item = catItemId;
+		
+		itemPolicy.applies_to = siamPolicy.applies_to;
+		itemPolicy.reverse_if_false = siamPolicy.reverse_if_false;
+		itemPolicy.order = siamPolicy.order;
+		itemPolicy.global = siamPolicy.global;
+		itemPolicy.view = siamPolicy.view;
+		itemPolicy.short_description = siamPolicy.short_description;
+		itemPolicy.catalog_conditions = siamPolicy.catalog_conditions; 
+		itemPolicy.on_load = siamPolicy.on_load; 
+		itemPolicy.run_scripts = siamPolicy.run_scripts;
+		itemPolicy.active = siamPolicy.active;
+		itemPolicy.script_true = siamPolicy.script_true;
+		itemPolicy.script_false = siamPolicy.script_false;
+		
+		return itemPolicy;
+	},
+	
+	_fillPolicyAction: function(itemPolicyAction,catItemId,siamPolicyAction) {
+		// Link to the Catalog Item
+		itemPolicyAction.catalog_item = catItemId;
+		
+		itemPolicyAction.variable_set = siamPolicyAction.variable_set;
+		itemPolicyAction.catalog_variable = siamPolicyAction.catalog_variable;
+		itemPolicyAction.mandatory = siamPolicyAction.mandatory;
+		itemPolicyAction.visible = siamPolicyAction.visible;
+		itemPolicyAction.disabled = siamPolicyAction.disabled;
+		
+		return itemPolicyAction;
+	},
+	
+	_fillScript: function(itemScript,catItemId,siamScript) {
+		// Link to the Catalog Item
+		itemScript.cat_item = catItemId;
+		
+		itemScript.name = siamScript.name; 
+		itemScript.applies_to = siamScript.applies_to; 
+		itemScript.active = siamScript.active;
+		itemScript.ui_type = siamScript.ui_type;
+		itemScript.script = siamScript.script; 
+		itemScript.type = siamScript.type;
+		itemScript.applies_catalog = siamScript.applies_catalog;
+		itemScript.applies_req_item = siamScript.applies_req_item;
+		itemScript.applies_sc_task = siamScript.applies_sc_task;
+		itemScript.cat_variable = siamScript.cat_variable;
+		itemScript.variable_set = siamScript.variable_set; 
+				
+		return itemScript;
+	},
+		
 	type: 'kpnSiamUtils'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
@@ -341,7 +512,7 @@ kpnSiamUtils.prototype = {
         <sys_created_on>2018-09-14 12:20:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>7a66cde90fa8630093284f8ce1050e47</sys_id>
-        <sys_mod_count>89</sys_mod_count>
+        <sys_mod_count>105</sys_mod_count>
         <sys_name>kpnSiamUtils</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy>read</sys_policy>
@@ -349,6 +520,6 @@ kpnSiamUtils.prototype = {
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_script_include_7a66cde90fa8630093284f8ce1050e47</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-28 13:37:37</sys_updated_on>
+        <sys_updated_on>2018-10-01 13:46:07</sys_updated_on>
     </sys_script_include>
 </record_update>

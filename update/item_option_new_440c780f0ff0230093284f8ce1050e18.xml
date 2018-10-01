@@ -21,7 +21,7 @@
         <field/>
         <global>false</global>
         <help_tag>More information</help_tag>
-        <help_text>Make your choice from the menu to determine what you do not want</help_text>
+        <help_text>You can enter here whatever you want. The information will not be used in the SIAM instance</help_text>
         <include_none>false</include_none>
         <instructions/>
         <layout>normal</layout>
@@ -32,15 +32,15 @@
         <lookup_unique>false</lookup_unique>
         <lookup_value/>
         <macro/>
-        <mandatory>false</mandatory>
+        <mandatory>true</mandatory>
         <map_to_field>false</map_to_field>
         <mask_use_confirmation>false</mask_use_confirmation>
         <mask_use_encryption>false</mask_use_encryption>
-        <name>useless_choice</name>
-        <order>300</order>
+        <name>useless_variable</name>
+        <order>100</order>
         <price_if_checked>0</price_if_checked>
         <pricing_implications>false</pricing_implications>
-        <question_text>Please make your choice</question_text>
+        <question_text>Enter some useless information here</question_text>
         <read_roles/>
         <rec_lookup_price/>
         <rec_price_if_checked>0</rec_price_if_checked>
@@ -57,21 +57,21 @@
         <summary_macro/>
         <sys_class_name>item_option_new</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-09-28 10:01:55</sys_created_on>
+        <sys_created_on>2018-10-01 13:27:09</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>1c40b0820f38230093284f8ce1050e3a</sys_id>
+        <sys_id>440c780f0ff0230093284f8ce1050e18</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Please make your choice</sys_name>
+        <sys_name>Enter some useless information here</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
-        <sys_update_name>item_option_new_1c40b0820f38230093284f8ce1050e3a</sys_update_name>
+        <sys_update_name>item_option_new_440c780f0ff0230093284f8ce1050e18</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-28 10:01:55</sys_updated_on>
+        <sys_updated_on>2018-10-01 13:27:09</sys_updated_on>
         <table/>
         <tooltip/>
-        <type>5</type>
+        <type>6</type>
         <ui_page/>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
@@ -85,22 +85,22 @@
         <visible_summary>true</visible_summary>
         <write_roles/>
     </item_option_new>
-    <sys_translated_text action="delete_multiple" query="documentkey=1c40b0820f38230093284f8ce1050e3a"/>
-    <fx_price action="delete_multiple" query="id=1c40b0820f38230093284f8ce1050e3a"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=440c780f0ff0230093284f8ce1050e18"/>
+    <fx_price action="delete_multiple" query="id=440c780f0ff0230093284f8ce1050e18"/>
     <fx_price action="INSERT_OR_UPDATE">
         <amount>0</amount>
         <currency display_value="EUR">EUR</currency>
         <field>price_if_checked</field>
-        <id>1c40b0820f38230093284f8ce1050e3a</id>
+        <id>440c780f0ff0230093284f8ce1050e18</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-09-28 10:01:55</sys_created_on>
-        <sys_id>d040b0820f38230093284f8ce1050e3d</sys_id>
+        <sys_created_on>2018-10-01 13:27:09</sys_created_on>
+        <sys_id>800c780f0ff0230093284f8ce1050e28</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-28 10:01:55</sys_updated_on>
+        <sys_updated_on>2018-10-01 13:27:09</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>
@@ -108,16 +108,16 @@
         <amount>0</amount>
         <currency display_value="EUR">EUR</currency>
         <field>rec_price_if_checked</field>
-        <id>1c40b0820f38230093284f8ce1050e3a</id>
+        <id>440c780f0ff0230093284f8ce1050e18</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-09-28 10:01:55</sys_created_on>
-        <sys_id>9440b0820f38230093284f8ce1050e3c</sys_id>
+        <sys_created_on>2018-10-01 13:27:09</sys_created_on>
+        <sys_id>440c780f0ff0230093284f8ce1050e27</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-28 10:01:55</sys_updated_on>
+        <sys_updated_on>2018-10-01 13:27:09</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>
