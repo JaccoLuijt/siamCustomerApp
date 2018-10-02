@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
+    <question_choice action="INSERT_OR_UPDATE">
+        <misc>289.55</misc>
+        <order>0</order>
+        <question display_value="Please make your choice">e72b21970f30630093284f8ce1050ede</question>
+        <rec_misc>5.791</rec_misc>
+        <sys_class_name>question_choice</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-10-02 11:31:46</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>ab2b21970f30630093284f8ce1050ee4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Blue</sys_name>
+        <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
+        <sys_update_name>question_choice_ab2b21970f30630093284f8ce1050ee4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-10-02 11:31:46</sys_updated_on>
+        <text>Blue</text>
+        <value>blue</value>
+    </question_choice>
+    <fx_price action="delete_multiple" query="id=ab2b21970f30630093284f8ce1050ee4"/>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>250</amount>
+        <currency display_value="EUR">EUR</currency>
+        <field>misc</field>
+        <id>ab2b21970f30630093284f8ce1050ee4</id>
+        <parent/>
+        <reference_amount>289.55</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-10-02 11:31:46</sys_created_on>
+        <sys_id>a72b21970f30630093284f8ce1050ee6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-10-02 11:31:46</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>5</amount>
+        <currency display_value="EUR">EUR</currency>
+        <field>rec_misc</field>
+        <id>ab2b21970f30630093284f8ce1050ee4</id>
+        <parent/>
+        <reference_amount>5.791</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-10-02 11:31:46</sys_created_on>
+        <sys_id>6b2b21970f30630093284f8ce1050ee5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-10-02 11:31:46</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+</record_update>

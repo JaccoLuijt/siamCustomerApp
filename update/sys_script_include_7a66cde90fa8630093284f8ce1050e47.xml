@@ -10,7 +10,8 @@ Make sure the following tables have cross scope access enabled: &#13;
 - sc_cat_item (CRUD)&#13;
 - sc_item_option_new (CRUD)&#13;
 - catalog_ui_policy (CRUD)&#13;
-- catalog_ui_policy_action&#13;
+- catalog_ui_policy_action (CRUD)&#13;
+- catalog_script_client (CRUD)&#13;
 - etc.</description>
         <name>kpnSiamUtils</name>
         <script><![CDATA[var kpnSiamUtils = Class.create();
@@ -207,7 +208,7 @@ kpnSiamUtils.prototype = {
 						itemPolicyAction.initialize();
 						
 						// Fill the record
-						itemPolicyAction = this._fillPolicyAction(itemPolicyAction,catItemId,siamPolicyAction);
+						itemPolicyAction = this._fillPolicyAction(itemPolicyAction,catItemId,itemPolicyId,siamPolicyAction);
 						itemPolicyAction.insert();
 					}
 				}
@@ -223,7 +224,7 @@ kpnSiamUtils.prototype = {
 			// Loop through the client scripts for this item
 			// and store the scripts
 			for (sIdx=0;sIdx < siamItem.client_script.onChange.length;sIdx++) {
-				this._storeCatItemScriptRecord(siamItem.onChange[sIdx].sys_id,siamUrl,'onChange'); 
+				this._storeCatItemScriptRecord(siamItem.client_script.onChange[sIdx].sys_id,siamUrl,catItemId); 
 			}
 		}
 		
@@ -231,7 +232,7 @@ kpnSiamUtils.prototype = {
 			// Loop through the client scripts for this item
 			// and store the scripts
 			for (sIdx=0;sIdx < siamItem.client_script.onSubmit.length;sIdx++) {
-				this._storeCatItemScriptRecord(siamItem.onSubmit[sIdx].sys_id,siamUrl,'onSubmit'); 
+				this._storeCatItemScriptRecord(siamItem.client_script.onSubmit[sIdx].sys_id,siamUrl,catItemId); 
 			}
 		}
 		
@@ -239,20 +240,20 @@ kpnSiamUtils.prototype = {
 			// Loop through the client scripts for this item
 			// and store the scripts
 			for (sIdx=0;sIdx < siamItem.client_script.onLoad.length;sIdx++) {
-				this._storeCatItemScriptRecord(siamItem.onLoad[sIdx].sys_id,siamUrl,'onLoad'); 
+				this._storeCatItemScriptRecord(siamItem.client_script.onLoad[sIdx].sys_id,siamUrl,catItemId); 
 			}
 		}
 	},
 
-	_storeCatItemScriptRecord: function(sys_id,siamUrl,scriptType) {
-		var siamScript = this._getSiamScript(sys_id,siamUrl);
+	_storeCatItemScriptRecord: function(siamId,siamUrl,catItemId) {
+		var siamScript = this._getSiamScript(siamId,siamUrl);
 		// Fill the variable in the Item_option_new table
-		var itemScript = new GlideRecord('sys_script_client');
+		var itemScript = new GlideRecord('catalog_script_client');
 		itemScript.initialize();
-		itemScript = this._fillScript(itemScript,catItemId,siamScript,scriptType);
-				
+		itemScript = this._fillScript(itemScript,catItemId,siamScript);
+
 		// Store the information
-		itemScript.insert();
+		itemScript.insert(); 
 	}, 
 	
 	_updateCatItem: function(siamItem,custItemId,siamUrl) {
@@ -279,7 +280,7 @@ kpnSiamUtils.prototype = {
 			// Fill the variable in the Item_option_new table
 			var itemVariable = new GlideRecord('item_option_new');
 			itemVariable.initialize();
-			itemVariable = this._fillVariable(itemVariable,catItemId,siamVariable);
+			itemVariable = this._fillVariable(itemVariable,custItemId,siamVariable); 
 			
 			// Store the information
 			var itemVarId = itemVariable.insert();
@@ -360,7 +361,7 @@ kpnSiamUtils.prototype = {
 	},
 	
 	_getSiamScript: function(siamScriptSysId,baseUrl) {
-		var siamScript = this._getSiamObject(baseUrl,'sys_script_client',siamScriptSysId);
+		var siamScript = this._getSiamObject(baseUrl,'catalog_script_client',siamScriptSysId);
 		return siamScript;
 	},
 	
@@ -396,8 +397,6 @@ kpnSiamUtils.prototype = {
 		catItem.show_price = siamItem.show_price;
 		catItem.show_quantity = siamItem.show_quantity;
 		catItem.order = siamItem.order;
-		catItem.picture = siamItem.picture;
-		catItem.icon = siamItem.icon;
 		
 		// Only fill these fields with the initial call(create)
 		if (custCatalog != '') {
@@ -473,11 +472,17 @@ kpnSiamUtils.prototype = {
 		return itemPolicy;
 	},
 	
-	_fillPolicyAction: function(itemPolicyAction,catItemId,siamPolicyAction) {
+	_fillPolicyAction: function(itemPolicyAction,catItemId,uiPolicyId,siamPolicyAction) {
 		// Link to the Catalog Item
 		itemPolicyAction.catalog_item = catItemId;
+		// Link to the Catalog UI Policy
+		itemPolicyAction.ui_policy = uiPolicyId; 
 		
+		itemPolicyAction.catalog_variable = siamPolicyAction.catalog_variable; 
+		gs.info(siamPolicyAction.variable); 
+		itemPolicyAction.variable = siamPolicyAction.variable; 
 		itemPolicyAction.variable_set = siamPolicyAction.variable_set;
+		itemPolicyAction.sys_name = siamPolicyAction.sys_name; 
 		itemPolicyAction.catalog_variable = siamPolicyAction.catalog_variable;
 		itemPolicyAction.mandatory = siamPolicyAction.mandatory;
 		itemPolicyAction.visible = siamPolicyAction.visible;
@@ -489,8 +494,7 @@ kpnSiamUtils.prototype = {
 	_fillScript: function(itemScript,catItemId,siamScript) {
 		// Link to the Catalog Item
 		itemScript.cat_item = catItemId;
-		
-		itemScript.name = siamScript.name; 
+		itemScript.name = siamScript.name;
 		itemScript.applies_to = siamScript.applies_to; 
 		itemScript.active = siamScript.active;
 		itemScript.ui_type = siamScript.ui_type;
@@ -501,7 +505,6 @@ kpnSiamUtils.prototype = {
 		itemScript.applies_sc_task = siamScript.applies_sc_task;
 		itemScript.cat_variable = siamScript.cat_variable;
 		itemScript.variable_set = siamScript.variable_set; 
-				
 		return itemScript;
 	},
 		
@@ -512,7 +515,7 @@ kpnSiamUtils.prototype = {
         <sys_created_on>2018-09-14 12:20:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>7a66cde90fa8630093284f8ce1050e47</sys_id>
-        <sys_mod_count>105</sys_mod_count>
+        <sys_mod_count>124</sys_mod_count>
         <sys_name>kpnSiamUtils</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy>read</sys_policy>
@@ -520,6 +523,6 @@ kpnSiamUtils.prototype = {
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_script_include_7a66cde90fa8630093284f8ce1050e47</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-01 13:46:07</sys_updated_on>
+        <sys_updated_on>2018-10-02 13:26:22</sys_updated_on>
     </sys_script_include>
 </record_update>

@@ -7,7 +7,7 @@
         <applies_target_record>false</applies_target_record>
         <applies_to>item</applies_to>
         <catalog_conditions>IO:c2ebdf97db2c6f40f448d3ca4b96191bLIKEdate^EQ</catalog_conditions>
-        <catalog_item display_value="CLD SIAM Test Catalog Item">623b9b13db2c6f40f448d3ca4b9619b3</catalog_item>
+        <catalog_item/>
         <conditions/>
         <description/>
         <global>true</global>
@@ -29,11 +29,11 @@
         <short_description>CLD Test SIAM UI Policy</short_description>
         <sys_class_name>catalog_ui_policy</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-10-01 13:46:23</sys_created_on>
+        <sys_created_on>2018-10-02 11:04:14</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>ad6001030f34230093284f8ce1050e21</sys_id>
+        <sys_id>c4e465530f30630093284f8ce1050eca</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>CLD Test SIAM UI Policy</sys_name>
         <sys_overrides/>
@@ -41,9 +41,9 @@
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
-        <sys_update_name>catalog_ui_policy_ad6001030f34230093284f8ce1050e21</sys_update_name>
+        <sys_update_name>catalog_ui_policy_c4e465530f30630093284f8ce1050eca</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-01 13:46:23</sys_updated_on>
+        <sys_updated_on>2018-10-02 11:04:14</sys_updated_on>
         <table/>
         <ui_type>0</ui_type>
         <variable_set/>
