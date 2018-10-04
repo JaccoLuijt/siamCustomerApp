@@ -98,7 +98,7 @@ kpnSiamReqUtils.prototype = {
 		var siamCatalog = gs.getProperty('x_122630_kpn_siam.kpn.siam.source.catalog.sysid');
 		// Get the category sysID from the SIAM Instance
 		var siamCategory = gs.getProperty('x_122630_kpn_siam.kpn.siam.source.catalog.category.sysid');
-		
+		gs.info(catalogUrl); 
 		// Get the list of valid catalog items
 		var restMessage = new sn_ws.RESTMessageV2('SIAM Catalog Items', 'get_catalog_items');
 		restMessage.setEndpoint(catalogUrl);
@@ -566,7 +566,7 @@ kpnSiamReqUtils.prototype = {
         <sys_created_on>2018-09-14 12:20:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>7a66cde90fa8630093284f8ce1050e47</sys_id>
-        <sys_mod_count>156</sys_mod_count>
+        <sys_mod_count>157</sys_mod_count>
         <sys_name>kpnSiamReqUtils</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy>read</sys_policy>
@@ -574,6 +574,6 @@ kpnSiamReqUtils.prototype = {
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_script_include_7a66cde90fa8630093284f8ce1050e47</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-04 11:09:06</sys_updated_on>
+        <sys_updated_on>2018-10-04 14:15:12</sys_updated_on>
     </sys_script_include>
 </record_update>
