@@ -2,9 +2,9 @@
     <sys_script_include action="INSERT_OR_UPDATE">
         <access>public</access>
         <active>true</active>
-        <api_name>x_122630_kpn_siam.kpnSiamUtils</api_name>
+        <api_name>x_122630_kpn_siam.kpnSiamReqUtils</api_name>
         <client_callable>false</client_callable>
-        <description>KPN SIAM Script Includes&#13;
+        <description>KPN SIAM Request Script Includes&#13;
 &#13;
 Make sure the following tables have cross scope access enabled: &#13;
 - sc_cat_item (CRUD)&#13;
@@ -13,9 +13,9 @@ Make sure the following tables have cross scope access enabled: &#13;
 - catalog_ui_policy_action (CRUD)&#13;
 - catalog_script_client (CRUD)&#13;
 - etc.</description>
-        <name>kpnSiamUtils</name>
-        <script><![CDATA[var kpnSiamUtils = Class.create();
-kpnSiamUtils.prototype = {
+        <name>kpnSiamReqUtils</name>
+        <script><![CDATA[var kpnSiamReqUtils = Class.create();
+kpnSiamReqUtils.prototype = {
 	initialize: function() {
 	},
 	
@@ -31,37 +31,61 @@ kpnSiamUtils.prototype = {
 		var postUrl = this._createPostURL(siamUrl,requestedItem.cat_item);
 		
 		// Create the actual request (including the variables)
-		var message = this._createMessage(requestedItem);
-		var variablesJson = this._createMessageVariables(requestedItem);
+		var messageJson = this._createMessage(requestedItem);
 		
 		// TBD Post the request to the SIAM instance
 		rm = new sn_ws.RESTMessageV2('SIAM Catalog Items', 'post_request');
+		rm.setRequestBody(messageJson);
 		rm.setEndpoint(postUrl);
 		
 		// Execute the API call
 		var syncResponse = rm.execute();
+		gs.info(syncResponse.getBody()); 
+		gs.info(syncResponse.getErrorCode()); 
 	},
-
+	
 	_createPostURL: function(baseUrl,catItem) {
 		// Create the URL based on the baseUrl and the fixed part
 		// Complete with the catalog API
-		// https://nsservicenowsbx.service-now.com/api/sn_sc/servicecatalog/items/{sys_id}/order_now
-		var siamUrl = baseUrl + '/api/sn_sc/servicecatalog/items/' + catItem + '/order_now';
-		
+		// https://nsservicenowsbx.service-now.com/api/sn_sc/servicecatalog/items/(sys_id)/order_now
+		var siamUrl = baseUrl + '/api/sn_sc/servicecatalog/items/' + catItem + '/order_now';		
 		return siamUrl;
 	},
-
-	_createMessage: function(requestedItem) {
-		var message;
-		
-		return message;
-	}, 
 	
-	_createMessageVariables: function(requestedItem) {
-		var json;
+	_createMessage: function(requestedItem) {
+		//Get the object containing the catalog variables.
+		var ritmVariables = requestedItem.variables;
 		
-		return json;
-	}, 
+		//Declare a fresh object.
+		//This will be made to contain all of the variables and variable values for the RITM,
+		//Then it will be pushed into the responseObj object.
+		var variablesObject = {
+		};
+		var responseObj = {
+		};
+		responseObj.sysparm_quantity="1"; 
+		
+		//Iterate over ritmVariables, looping through each one as v.
+		//This is necessary because the "requestedItem.variables" is not a standard JS object, and cannot be mapped.
+		for (var v in ritmVariables) {
+			var variableName = v.toString(); //Make sure we're all proper strings here.
+			//pushing the variable into variablesObject,
+			//which will be copied into responseObject along with a version of variablesObject.
+			variablesObject[variableName] = ritmVariables[variableName].toString();
+		}
+		//Call _addObjToObj function to add variablesObject to responseObj '.
+		responseObj = this._addObjToObj(responseObj, variablesObject, 'variables');
+		
+		var json = JSON.stringify(responseObj);
+		gs.info(json); 
+		return json; //Returning the variables and their values.
+		//Returning an object here will set the response "body" to the JSON equivalent of this object.
+	},
+	
+	_addObjToObj: function(parent, child, name) {
+		parent[name] = child;
+		return parent;
+	},
 	
 	syncCatalogItems: function() {
 		// Get the URL property
@@ -500,7 +524,6 @@ kpnSiamUtils.prototype = {
 		// Link to the Catalog UI Policy
 		itemPolicyAction.ui_policy = uiPolicyId;
 		var siamVarId = siamPolicyAction.name.replace("IO:", "");
-		gs.info(siamVarId);
 		
 		var varId;
 		for (var i = 0; i < varArray.length; i++) {
@@ -510,7 +533,6 @@ kpnSiamUtils.prototype = {
 			}
 		}
 		
-		gs.info(varId);
 		itemPolicyAction.catalog_variable = "IO:"+varId;
 		gs.info(itemPolicyAction.catalog_variable);
 		itemPolicyAction.mandatory = siamPolicyAction.mandatory;
@@ -537,21 +559,21 @@ kpnSiamUtils.prototype = {
 		return itemScript;
 	},
 	
-	type: 'kpnSiamUtils'
+	type: 'kpnSiamReqUtils'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-09-14 12:20:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>7a66cde90fa8630093284f8ce1050e47</sys_id>
-        <sys_mod_count>133</sys_mod_count>
-        <sys_name>kpnSiamUtils</sys_name>
+        <sys_mod_count>156</sys_mod_count>
+        <sys_name>kpnSiamReqUtils</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy>read</sys_policy>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_script_include_7a66cde90fa8630093284f8ce1050e47</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-03 14:16:02</sys_updated_on>
+        <sys_updated_on>2018-10-04 11:09:06</sys_updated_on>
     </sys_script_include>
 </record_update>
