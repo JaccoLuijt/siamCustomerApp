@@ -20,20 +20,19 @@ kpnSiamReqUtils.prototype = {
 	},
 	
 	sendSiamRequest: function(requestedItem) {
-		// TBD
 		// This function sends the information from the current requested Item
 		// to the SIAM instance. Once the information is send the SIAM instance
 		// will update the state of the current request item record
-		var debug = true;
+		gs.info('kpnSiamReqUtils.sendSiamRequest'); 		
 		
 		// Get the URL property for the SIAM Instance
 		var siamUrl = gs.getProperty('x_122630_kpn_siam.kpn.siam.base.url');
 		var postUrl = this._createPostURL(siamUrl,requestedItem.cat_item);
+		gs.info('Send message to URL:'+postUrl); 
 		
 		// Create the actual request (including the variables)
 		var messageJson = this._createMessage(requestedItem);
-		
-		// TBD Post the request to the SIAM instance
+		gs.info('Send Message:'+messageJson); 
 		rm = new sn_ws.RESTMessageV2('SIAM Catalog Items', 'post_request');
 		rm.setRequestBody(messageJson);
 		rm.setEndpoint(postUrl);
@@ -88,6 +87,7 @@ kpnSiamReqUtils.prototype = {
 	},
 	
 	syncCatalogItems: function() {
+		gs.info('kpnSiamReqUtils.syncCatalogItems'); 		
 		// Get the URL property
 		var siamUrl = gs.getProperty('x_122630_kpn_siam.kpn.siam.base.url');
 		
@@ -98,7 +98,7 @@ kpnSiamReqUtils.prototype = {
 		var siamCatalog = gs.getProperty('x_122630_kpn_siam.kpn.siam.source.catalog.sysid');
 		// Get the category sysID from the SIAM Instance
 		var siamCategory = gs.getProperty('x_122630_kpn_siam.kpn.siam.source.catalog.category.sysid');
-		gs.info(catalogUrl); 
+		gs.info('Send message to URL:'+catalogUrl); 
 		// Get the list of valid catalog items
 		var restMessage = new sn_ws.RESTMessageV2('SIAM Catalog Items', 'get_catalog_items');
 		restMessage.setEndpoint(catalogUrl);
@@ -137,6 +137,8 @@ kpnSiamReqUtils.prototype = {
 					this._updateCatItem(siamItemFull,catItem,siamUrl);
 				}
 			}
+		} else {
+			gs.info('Error Code:'+syncResponse.getErrorCode()+', '+syncResponse.getErrorMessage()); 
 		}
 	},
 	
@@ -566,7 +568,7 @@ kpnSiamReqUtils.prototype = {
         <sys_created_on>2018-09-14 12:20:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>7a66cde90fa8630093284f8ce1050e47</sys_id>
-        <sys_mod_count>157</sys_mod_count>
+        <sys_mod_count>158</sys_mod_count>
         <sys_name>kpnSiamReqUtils</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy>read</sys_policy>
@@ -574,6 +576,6 @@ kpnSiamReqUtils.prototype = {
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_script_include_7a66cde90fa8630093284f8ce1050e47</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-04 14:15:12</sys_updated_on>
+        <sys_updated_on>2018-10-05 06:36:09</sys_updated_on>
     </sys_script_include>
 </record_update>
