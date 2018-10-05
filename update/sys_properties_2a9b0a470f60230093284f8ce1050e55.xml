@@ -10,13 +10,11 @@
         <sys_class_name>sys_properties</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-09-19 08:59:15</sys_created_on>
-        <sys_customer_update>false</sys_customer_update>
         <sys_id>2a9b0a470f60230093284f8ce1050e55</sys_id>
         <sys_mod_count>2</sys_mod_count>
         <sys_name>x_122630_kpn_siam.kpn.siam.customer.workflow.sysid</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
-        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_properties_2a9b0a470f60230093284f8ce1050e55</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
