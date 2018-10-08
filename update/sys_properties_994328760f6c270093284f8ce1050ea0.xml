@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
     <sys_properties action="INSERT_OR_UPDATE">
         <choices/>
-        <description>The sys ID of the category in the Customer system of the SIAM Catalog Items</description>
+        <description>The sys ID of the category in the local (Customer) instance where the SIAM Catalog Items will be stored</description>
         <ignore_cache>false</ignore_cache>
         <is_private>false</is_private>
         <name>x_122630_kpn_siam.kpn.siam.customer.catalog.category.sysid</name>
@@ -10,15 +10,17 @@
         <sys_class_name>sys_properties</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-09-18 06:44:55</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
         <sys_id>994328760f6c270093284f8ce1050ea0</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>x_122630_kpn_siam.kpn.siam.customer.catalog.category.sysid</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_properties_994328760f6c270093284f8ce1050ea0</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-18 06:47:08</sys_updated_on>
+        <sys_updated_on>2018-10-08 06:25:43</sys_updated_on>
         <type>string</type>
         <value>148364fa0f6c270093284f8ce1050eae</value>
         <write_roles/>

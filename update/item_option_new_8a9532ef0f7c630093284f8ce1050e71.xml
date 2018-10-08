@@ -58,11 +58,13 @@
         <sys_class_name>item_option_new</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-03 11:35:22</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
         <sys_id>8a9532ef0f7c630093284f8ce1050e71</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>Enter a date which will be ignored in the process</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>item_option_new_8a9532ef0f7c630093284f8ce1050e71</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
