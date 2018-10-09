@@ -5,43 +5,45 @@
         <assessment/>
         <content_page/>
         <device_type/>
-        <filter/>
-        <hint/>
+        <filter table="x_122630_kpn_siam_supplier_request">active=true^EQ<item endquery="false" field="active" goto="false" newquery="false" operator="=" or="false" value="true"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter>
+        <hint>Show the currently open SIAM Supplier Requests</hint>
         <homepage/>
         <image/>
         <link_type>LIST</link_type>
         <map_page/>
-        <mobile_title>Application Logs</mobile_title>
+        <mobile_title>Supplier Requests</mobile_title>
         <mobile_view_name>Mobile</mobile_view_name>
-        <name>syslog_app_scope</name>
-        <order>400</order>
+        <name>x_122630_kpn_siam_supplier_request</name>
+        <order>10</order>
         <override_menu_roles>false</override_menu_roles>
-        <query>sys_created_onONToday@javascript:gs.daysAgoStart(0)@javascript:gs.daysAgoEnd(0)^sourceSTARTSWITHx_122630_kpn_siam</query>
+        <query/>
         <report/>
-        <roles>x_122630_kpn_siam.SIAM_Admin,x_122630_kpn_siam.SIAM_User</roles>
+        <roles>x_122630_kpn_siam.SIAM_Admin</roles>
         <survey/>
-        <survey_overwrite>false</survey_overwrite>
+        <survey_overwrite>true</survey_overwrite>
         <sys_class_name>sys_app_module</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-10-05 09:49:08</sys_created_on>
+        <sys_created_on>2018-10-08 13:15:32</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>aeaf2c9c4f45e740e82ef2318110c7eb</sys_id>
-        <sys_mod_count>3</sys_mod_count>
-        <sys_name>Application Logs</sys_name>
+        <sys_id>827c3cd90f05230093284f8ce1050e79</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Supplier Requests</sys_name>
         <sys_overrides/>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
-        <sys_update_name>sys_app_module_aeaf2c9c4f45e740e82ef2318110c7eb</sys_update_name>
+        <sys_update_name>sys_app_module_827c3cd90f05230093284f8ce1050e79</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-09 06:52:50</sys_updated_on>
+        <sys_updated_on>2018-10-09 06:53:36</sys_updated_on>
         <timeline_page/>
-        <title>Application Logs</title>
+        <title>Supplier Requests</title>
         <uncancelable>false</uncancelable>
-        <view_name>Debug</view_name>
+        <view_name/>
         <window_name/>
     </sys_app_module>
 </record_update>

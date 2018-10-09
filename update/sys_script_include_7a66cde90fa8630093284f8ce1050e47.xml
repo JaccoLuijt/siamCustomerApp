@@ -17,7 +17,6 @@ Make sure the following tables have cross scope access enabled: &#13;
         <script><![CDATA[var kpnSiamReqUtils = Class.create();
 kpnSiamReqUtils.prototype = {
 	initialize: function() {
-		
 		this.su = new kpnSiamUtils();
 		var log;
 	},
@@ -26,7 +25,7 @@ kpnSiamReqUtils.prototype = {
 		// This function sends the information from the current requested Item
 		// to the SIAM instance. Once the information is send the SIAM instance
 		// will update the state of the current request item record
-		log = this.su.logDebugRule('kpnSiamReqUtils.sendSiamRequest');		
+		log = this.su.logDebugRule('kpnSiamReqUtils.sendSiamRequest');
 		
 		// Get the URL property for the SIAM Instance
 		var siamUrl = gs.getProperty('x_122630_kpn_siam.kpn.siam.base.url');
@@ -35,7 +34,9 @@ kpnSiamReqUtils.prototype = {
 		
 		// Create the actual request (including the variables)
 		var messageJson = this._createMessage(requestedItem);
+		var suppReqId = this._createSupplierRequest(requestedItem,messageJson);
 		log = this.su.logDebugRule('Send Message:'+messageJson);
+		
 		rm = new sn_ws.RESTMessageV2('SIAM Catalog Items', 'post_request');
 		rm.setRequestBody(messageJson);
 		rm.setEndpoint(postUrl);
@@ -44,13 +45,14 @@ kpnSiamReqUtils.prototype = {
 		var syncResponse = rm.execute();
 		log = this.su.logDebugRule(syncResponse.getBody());
 		log = this.su.logDebugRule(syncResponse.getErrorCode());
+		this._updateSupplierRequest(suppReqId,syncResponse);
 	},
 	
 	_createPostURL: function(baseUrl,catItem) {
 		// Create the URL based on the baseUrl and the fixed part
 		// Complete with the catalog API
 		// https://nsservicenowsbx.service-now.com/api/sn_sc/servicecatalog/items/(sys_id)/order_now
-		var siamUrl = baseUrl + '/api/sn_sc/servicecatalog/items/' + catItem + '/order_now';		
+		var siamUrl = baseUrl + '/api/sn_sc/servicecatalog/items/' + catItem + '/order_now';
 		return siamUrl;
 	},
 	
@@ -65,7 +67,7 @@ kpnSiamReqUtils.prototype = {
 		};
 		var responseObj = {
 		};
-		responseObj.sysparm_quantity="1"; 
+		responseObj.sysparm_quantity='1';
 		
 		//Iterate over ritmVariables, looping through each one as v.
 		//This is necessary because the "requestedItem.variables" is not a standard JS object, and cannot be mapped.
@@ -90,14 +92,45 @@ kpnSiamReqUtils.prototype = {
 		return parent;
 	},
 	
+	_createSupplierRequest: function(requestedItem,messageJson) {
+		// Create a record in the Supplier Requet table
+		// to be able to track a request from the customer instance
+		var suppReq = new GlideRecord('x_122630_kpn_siam_supplier_request');
+		suppReq.initialize();
+		suppReq.request = requestedItem.request;
+		suppReq.requested_item = requestedItem.sys_id;
+		suppReq.request_body = messageJson;
+		var returnId = suppReq.insert();
+		return returnId;
+	},
+	
+	_updateSupplierRequest: function(suppReqId,syncResponse) {
+		// Update the supplier Request after it has been sent to the SIAM Supplier instance
+		var suppReq = new GlideRecord('x_122630_kpn_siam_supplier_request');
+		suppReq.get(suppReqId);
+		suppReq.state = 'in_process';
+		suppReq.response_body = syncResponse.getBody();
+		suppReq.error_code = syncResponse.getErrorCode();
+		
+		// Obtain the Request number from the SIAM instance and store this as a string (no reference)
+		if (!syncResponse.haveError()) {
+			var responseObject = JSON.parse(syncResponse.getBody());
+			suppReq.supplier_request = responseObject.result.number;
+		} else {
+			log = this.su.logDebugRule('Unable to succesfull process this request in the SIAM instance');
+		}
+		// Update the Supplier Request
+		suppReq.update();
+	},
+	
 	syncCatalogItems: function() {
-		log = this.su.logDebugRule('kpnSiamReqUtils.syncCatalogItems');		
+		log = this.su.logDebugRule('kpnSiamReqUtils.syncCatalogItems');
 		// Get the URL property
 		var siamUrl = gs.getProperty('x_122630_kpn_siam.kpn.siam.base.url');
 		
 		// Obtain the URL for the SIAM Instance
 		var catalogUrl = this._createCatalogURL(siamUrl);
-		log = this.su.logDebugRule('Send message to URL:'+catalogUrl); 
+		log = this.su.logDebugRule('Send message to URL:'+catalogUrl);
 		
 		// Get the catalog sysID from the SIAM Instance
 		var siamCatalog = gs.getProperty('x_122630_kpn_siam.kpn.siam.source.catalog.sysid');
@@ -143,7 +176,7 @@ kpnSiamReqUtils.prototype = {
 				}
 			}
 		} else {
-			log = this.su.logDebugRule('Error Code:'+syncResponse.getErrorCode()+', '+syncResponse.getErrorMessage()); 
+			log = this.su.logDebugRule('Error Code:'+syncResponse.getErrorCode()+', '+syncResponse.getErrorMessage());
 		}
 	},
 	
@@ -573,7 +606,7 @@ kpnSiamReqUtils.prototype = {
         <sys_created_on>2018-09-14 12:20:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>7a66cde90fa8630093284f8ce1050e47</sys_id>
-        <sys_mod_count>178</sys_mod_count>
+        <sys_mod_count>188</sys_mod_count>
         <sys_name>kpnSiamReqUtils</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy>read</sys_policy>
@@ -581,6 +614,6 @@ kpnSiamReqUtils.prototype = {
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_script_include_7a66cde90fa8630093284f8ce1050e47</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-08 09:35:33</sys_updated_on>
+        <sys_updated_on>2018-10-09 10:08:41</sys_updated_on>
     </sys_script_include>
 </record_update>

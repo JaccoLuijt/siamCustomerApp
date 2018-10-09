@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role_contains">
+    <sys_user_role_contains action="INSERT_OR_UPDATE">
+        <contains display_value="x_122630_kpn_siam.SIAM_User" name="x_122630_kpn_siam.SIAM_User">9f45d1e50fe8630093284f8ce1050e35</contains>
+        <role display_value="x_122630_kpn_siam.SIAM_Admin" name="x_122630_kpn_siam.SIAM_Admin">6d2595e50fe8630093284f8ce1050e23</role>
+        <sys_class_name>sys_user_role_contains</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-10-08 13:24:51</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>ea9efc1d0f05230093284f8ce1050e0b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_122630_kpn_siam.SIAM_User.x_122630_kpn_siam.SIAM_Admin</sys_name>
+        <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
+        <sys_update_name>sys_user_role_contains_ea9efc1d0f05230093284f8ce1050e0b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-10-08 13:24:51</sys_updated_on>
+    </sys_user_role_contains>
+</record_update>

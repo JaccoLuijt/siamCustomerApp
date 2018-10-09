@@ -2,7 +2,7 @@
     <item_option_new action="INSERT_OR_UPDATE">
         <active>true</active>
         <attributes/>
-        <cat_item/>
+        <cat_item display_value="SIAM.001 Test Catalog Item">2def544fdb3427001fe3574b689619d4</cat_item>
         <category/>
         <choice_direction>down</choice_direction>
         <choice_field/>
@@ -21,7 +21,7 @@
         <field/>
         <global>false</global>
         <help_tag>More information</help_tag>
-        <help_text>Make your choice from the menu to determine what you do not want</help_text>
+        <help_text/>
         <include_none>false</include_none>
         <instructions/>
         <layout>normal</layout>
@@ -32,15 +32,15 @@
         <lookup_unique>false</lookup_unique>
         <lookup_value/>
         <macro/>
-        <mandatory>false</mandatory>
+        <mandatory>true</mandatory>
         <map_to_field>false</map_to_field>
         <mask_use_confirmation>false</mask_use_confirmation>
         <mask_use_encryption>false</mask_use_encryption>
-        <name>useless_choice</name>
-        <order>300</order>
+        <name>u_question</name>
+        <order>200</order>
         <price_if_checked>0</price_if_checked>
         <pricing_implications>false</pricing_implications>
-        <question_text>Please make your choice</question_text>
+        <question_text>When do you think someone is an alcoholic?</question_text>
         <read_roles/>
         <rec_lookup_price/>
         <rec_price_if_checked>0</rec_price_if_checked>
@@ -51,27 +51,27 @@
         <reference_qual_condition/>
         <scale_max>5</scale_max>
         <scale_min>0</scale_min>
-        <show_help>true</show_help>
+        <show_help>false</show_help>
         <show_help_on_load>false</show_help_on_load>
         <sp_widget/>
         <summary_macro/>
         <sys_class_name>item_option_new</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-10-04 12:00:07</sys_created_on>
+        <sys_created_on>2018-10-09 09:00:21</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>9ed404c80fc9a30093284f8ce1050ed0</sys_id>
+        <sys_id>e5ab05ad0fcd230093284f8ce1050eb1</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Please make your choice</sys_name>
+        <sys_name>When do you think someone is an alcoholic?</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
-        <sys_update_name>item_option_new_9ed404c80fc9a30093284f8ce1050ed0</sys_update_name>
+        <sys_update_name>item_option_new_e5ab05ad0fcd230093284f8ce1050eb1</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-04 12:00:07</sys_updated_on>
+        <sys_updated_on>2018-10-09 09:00:21</sys_updated_on>
         <table/>
         <tooltip/>
-        <type>5</type>
+        <type>6</type>
         <ui_page/>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
@@ -85,39 +85,39 @@
         <visible_summary>true</visible_summary>
         <write_roles/>
     </item_option_new>
-    <sys_translated_text action="delete_multiple" query="documentkey=9ed404c80fc9a30093284f8ce1050ed0"/>
-    <fx_price action="delete_multiple" query="id=9ed404c80fc9a30093284f8ce1050ed0"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=e5ab05ad0fcd230093284f8ce1050eb1"/>
+    <fx_price action="delete_multiple" query="id=e5ab05ad0fcd230093284f8ce1050eb1"/>
     <fx_price action="INSERT_OR_UPDATE">
         <amount>0</amount>
-        <currency display_value="USD">USD</currency>
+        <currency display_value="EUR">EUR</currency>
         <field>price_if_checked</field>
-        <id>9ed404c80fc9a30093284f8ce1050ed0</id>
+        <id>e5ab05ad0fcd230093284f8ce1050eb1</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-10-04 12:00:07</sys_created_on>
-        <sys_id>d2d404c80fc9a30093284f8ce1050ed3</sys_id>
+        <sys_created_on>2018-10-09 09:00:21</sys_created_on>
+        <sys_id>6dab05ad0fcd230093284f8ce1050eb3</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-04 12:00:07</sys_updated_on>
+        <sys_updated_on>2018-10-09 09:00:21</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>
     <fx_price action="INSERT_OR_UPDATE">
         <amount>0</amount>
-        <currency display_value="USD">USD</currency>
+        <currency display_value="EUR">EUR</currency>
         <field>rec_price_if_checked</field>
-        <id>9ed404c80fc9a30093284f8ce1050ed0</id>
+        <id>e5ab05ad0fcd230093284f8ce1050eb1</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-10-04 12:00:07</sys_created_on>
-        <sys_id>52d404c80fc9a30093284f8ce1050ed2</sys_id>
+        <sys_created_on>2018-10-09 09:00:21</sys_created_on>
+        <sys_id>21ab05ad0fcd230093284f8ce1050eb3</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-04 12:00:07</sys_updated_on>
+        <sys_updated_on>2018-10-09 09:00:21</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>

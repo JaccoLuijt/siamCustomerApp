@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_category">
     <sc_cat_item_category action="INSERT_OR_UPDATE">
-        <sc_cat_item display_value="CLD SIAM Test Catalog Item">623b9b13db2c6f40f448d3ca4b9619b3</sc_cat_item>
+        <sc_cat_item display_value="SIAM.001 Test Catalog Item">2def544fdb3427001fe3574b689619d4</sc_cat_item>
         <sc_category display_value="Automated SIAM Items">148364fa0f6c270093284f8ce1050eae</sc_category>
         <sys_class_name>sc_cat_item_category</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-10-04 12:00:04</sys_created_on>
+        <sys_created_on>2018-10-09 09:00:17</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>a9d404c80fc9a30093284f8ce1050e71</sys_id>
+        <sys_id>74ab05ad0fcd230093284f8ce1050e28</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Automated SIAM Items.CLD SIAM Test Catalog Item</sys_name>
+        <sys_name>Automated SIAM Items.SIAM.001 Test Catalog Item</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
-        <sys_update_name>sc_cat_item_category_a9d404c80fc9a30093284f8ce1050e71</sys_update_name>
+        <sys_update_name>sc_cat_item_category_74ab05ad0fcd230093284f8ce1050e28</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-04 12:00:04</sys_updated_on>
+        <sys_updated_on>2018-10-09 09:00:17</sys_updated_on>
     </sc_cat_item_category>
 </record_update>
