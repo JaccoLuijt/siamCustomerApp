@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_category">
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sc_category">
     <sc_category action="INSERT_OR_UPDATE">
         <active>true</active>
         <description/>
@@ -33,6 +34,6 @@
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2018-09-18 06:46:23</sys_updated_on>
         <title>Automated SIAM Items</title>
+        <u_vra_uid/>
     </sc_category>
-    <sys_translated_text action="delete_multiple" query="documentkey=148364fa0f6c270093284f8ce1050eae"/>
 </record_update>

@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update table="item_option_new">
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="item_option_new">
     <item_option_new action="INSERT_OR_UPDATE">
         <active>true</active>
         <attributes/>
-        <cat_item display_value="SIAM.001 Test Catalog Item">2def544fdb3427001fe3574b689619d4</cat_item>
+        <cat_item/>
         <category/>
         <choice_direction>down</choice_direction>
         <choice_field/>
@@ -72,6 +73,9 @@
         <table/>
         <tooltip/>
         <type>1</type>
+        <u_is_vra_read_only>false</u_is_vra_read_only>
+        <u_is_vra_variable>false</u_is_vra_variable>
+        <u_vra_name/>
         <ui_page/>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>

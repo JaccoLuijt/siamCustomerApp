@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category">
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_properties_category">
     <sys_properties_category action="INSERT_OR_UPDATE">
         <name>KPN SIAM</name>
         <sys_class_name>sys_properties_category</sys_class_name>
@@ -17,5 +18,4 @@
         <sys_updated_on>2018-09-14 13:16:14</sys_updated_on>
         <title/>
     </sys_properties_category>
-    <sys_translated_text action="delete_multiple" query="documentkey=947615290fe8630093284f8ce1050edc"/>
 </record_update>

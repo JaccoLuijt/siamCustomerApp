@@ -1,112 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_ui_form_sections form_id="f3d108630f60630093284f8ce1050e9c" sys_domain="global" table="sn_cmp_rsrc_opr_cat_item" version="3">
-        <sys_ui_form_section action="INSERT_OR_UPDATE">
-            <position>0</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-09-20 12:14:28</sys_created_on>
-            <sys_domain>global</sys_domain>
-            <sys_domain_path>/</sys_domain_path>
-            <sys_id>73d108630f60630093284f8ce1050ea0</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_overrides/>
-            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">f3d108630f60630093284f8ce1050e9c</sys_ui_form>
-            <sys_ui_section caption="NULL" display_value="" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">ffd108630f60630093284f8ce1050e9d</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-09-20 12:14:28</sys_updated_on>
-        </sys_ui_form_section>
-        <sys_ui_form_section action="INSERT_OR_UPDATE">
-            <position>1</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-09-20 12:14:28</sys_created_on>
-            <sys_domain>global</sys_domain>
-            <sys_domain_path>/</sys_domain_path>
-            <sys_id>77d108630f60630093284f8ce1050ea8</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_overrides/>
-            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">f3d108630f60630093284f8ce1050e9c</sys_ui_form>
-            <sys_ui_section caption="Item Details" display_value="Item Details" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">ffd108630f60630093284f8ce1050ea6</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-09-20 12:14:28</sys_updated_on>
-        </sys_ui_form_section>
-        <sys_ui_form_section action="INSERT_OR_UPDATE">
-            <position>2</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-09-20 12:14:28</sys_created_on>
-            <sys_domain>global</sys_domain>
-            <sys_domain_path>/</sys_domain_path>
-            <sys_id>7bd108630f60630093284f8ce1050ea1</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_overrides/>
-            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">f3d108630f60630093284f8ce1050e9c</sys_ui_form>
-            <sys_ui_section caption="Process Engine" display_value="Process Engine" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">77d108630f60630093284f8ce1050ea0</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-09-20 12:14:28</sys_updated_on>
-        </sys_ui_form_section>
-        <sys_ui_form_section action="INSERT_OR_UPDATE">
-            <position>3</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-09-20 12:14:28</sys_created_on>
-            <sys_domain>global</sys_domain>
-            <sys_domain_path>/</sys_domain_path>
-            <sys_id>77d108630f60630093284f8ce1050ea3</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_overrides/>
-            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">f3d108630f60630093284f8ce1050e9c</sys_ui_form>
-            <sys_ui_section caption="Picture" display_value="Picture" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">7fd108630f60630093284f8ce1050ea1</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-09-20 12:14:28</sys_updated_on>
-        </sys_ui_form_section>
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_ui_form_sections form_id="ffd108630f60630093284f8ce1050ea4" sys_domain="global" table="" version="3">
         <sys_ui_form_section action="INSERT_OR_UPDATE">
             <position>4</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-09-20 12:14:28</sys_created_on>
-            <sys_domain>global</sys_domain>
-            <sys_domain_path>/</sys_domain_path>
-            <sys_id>ffd108630f60630093284f8ce1050ea4</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_overrides/>
-            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">f3d108630f60630093284f8ce1050e9c</sys_ui_form>
-            <sys_ui_section caption="Mobile" display_value="Mobile" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">7bd108630f60630093284f8ce1050ea3</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-09-20 12:14:28</sys_updated_on>
-        </sys_ui_form_section>
-        <sys_ui_form_section action="INSERT_OR_UPDATE">
-            <position>5</position>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-09-20 12:14:28</sys_created_on>
-            <sys_domain>global</sys_domain>
-            <sys_domain_path>/</sys_domain_path>
-            <sys_id>fbd108630f60630093284f8ce1050ea6</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_overrides/>
-            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">f3d108630f60630093284f8ce1050e9c</sys_ui_form>
-            <sys_ui_section caption="Pricing" display_value="Pricing" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">f3d108630f60630093284f8ce1050ea5</sys_ui_section>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-09-20 12:14:28</sys_updated_on>
-        </sys_ui_form_section>
-        <sys_ui_form action="INSERT_OR_UPDATE">
-            <name>sn_cmp_rsrc_opr_cat_item</name>
-            <roles/>
-            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_class_name>sys_ui_form_section</sys_class_name>
             <sys_created_by>admin</sys_created_by>
             <sys_created_on>2018-09-20 12:14:28</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
-            <sys_id>f3d108630f60630093284f8ce1050e9c</sys_id>
+            <sys_id>ffd108630f60630093284f8ce1050ea4</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_name>sn_cmp_rsrc_opr_cat_item</sys_name>
+            <sys_name/>
             <sys_overrides/>
             <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
             <sys_policy/>
             <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
             <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
+            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">f3d108630f60630093284f8ce1050e9c</sys_ui_form>
+            <sys_ui_section display_value="">7bd108630f60630093284f8ce1050ea3</sys_ui_section>
             <sys_update_name>sys_ui_form_sections_f3d108630f60630093284f8ce1050e9c</sys_update_name>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2018-09-20 12:14:28</sys_updated_on>
-            <sys_user/>
-            <view display_value="Default view" name="NULL">Default view</view>
-            <view_name/>
-        </sys_ui_form>
+        </sys_ui_form_section>
     </sys_ui_form_sections>
 </record_update>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update>
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
     <sys_choice action="INSERT_OR_UPDATE" field="state" table="x_122630_kpn_siam_supplier_request" version="3">
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
@@ -140,7 +141,7 @@
             <sys_created_by>admin</sys_created_by>
             <sys_created_on>2018-10-08 13:29:23</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
-            <sys_id>38afb41d0f05230093284f8ce1050e80</sys_id>
+            <sys_id>4a239c16db6daf04f448d3ca4b9619e4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name>state</sys_name>
             <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>

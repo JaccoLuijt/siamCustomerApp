@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Supplier Request activity formatter fields</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>glide.ui.x_122630_kpn_siam_supplier_request_activity.fields</name>
+        <read_roles/>
+        <suffix/>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>jacco.luijt@kpn.com</sys_created_by>
+        <sys_created_on>2018-10-31 07:59:37</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>aab05e28dbad2f04852a789e3b96192b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>glide.ui.x_122630_kpn_siam_supplier_request_activity.fields</sys_name>
+        <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
+        <sys_update_name>sys_properties_aab05e28dbad2f04852a789e3b96192b</sys_update_name>
+        <sys_updated_by>jacco.luijt@kpn.com</sys_updated_by>
+        <sys_updated_on>2018-10-31 07:59:37</sys_updated_on>
+        <type>string</type>
+        <value>number,request,requested_item,request_body,response_body,supplier_request,state,work_notes,error_code</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=aab05e28dbad2f04852a789e3b96192b"/>
+</record_update>

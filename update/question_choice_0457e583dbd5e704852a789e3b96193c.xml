@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="question_choice">
+    <question_choice action="INSERT_OR_UPDATE">
+        <misc>0</misc>
+        <order>2</order>
+        <question display_value="">4057e583dbd5e704852a789e3b96192f</question>
+        <rec_misc>0</rec_misc>
+        <sys_class_name>question_choice</sys_class_name>
+        <sys_created_by>jacco.luijt@kpn.com</sys_created_by>
+        <sys_created_on>2018-10-26 13:07:48</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>0457e583dbd5e704852a789e3b96193c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>C-NIBO_CLIENT</sys_name>
+        <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
+        <sys_update_name>question_choice_0457e583dbd5e704852a789e3b96193c</sys_update_name>
+        <sys_updated_by>jacco.luijt@kpn.com</sys_updated_by>
+        <sys_updated_on>2018-10-26 13:07:48</sys_updated_on>
+        <text>C-NIBO_CLIENT</text>
+        <value>C-NIBO_CLIENT</value>
+    </question_choice>
+    <fx_price action="delete_multiple" query="id=0457e583dbd5e704852a789e3b96193c"/>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="EUR">EUR</currency>
+        <field>misc</field>
+        <id>0457e583dbd5e704852a789e3b96193c</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="EUR">EUR</reference_currency>
+        <sys_created_by>jacco.luijt@kpn.com</sys_created_by>
+        <sys_created_on>2018-10-26 13:07:48</sys_created_on>
+        <sys_id>8457e583dbd5e704852a789e3b96193d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jacco.luijt@kpn.com</sys_updated_by>
+        <sys_updated_on>2018-10-26 13:07:48</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="EUR">EUR</currency>
+        <field>rec_misc</field>
+        <id>0457e583dbd5e704852a789e3b96193c</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="EUR">EUR</reference_currency>
+        <sys_created_by>jacco.luijt@kpn.com</sys_created_by>
+        <sys_created_on>2018-10-26 13:07:48</sys_created_on>
+        <sys_id>4c57e583dbd5e704852a789e3b96193c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jacco.luijt@kpn.com</sys_updated_by>
+        <sys_updated_on>2018-10-26 13:07:48</sys_updated_on>
+        <table>question_choice</table>
+        <type>calculated</type>
+    </fx_price>
+</record_update>

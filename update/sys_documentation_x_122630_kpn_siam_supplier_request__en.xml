@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update>
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
     <sys_documentation element="" label="Supplier Request" language="en" table="x_122630_kpn_siam_supplier_request">
         <sys_documentation action="INSERT_OR_UPDATE">
             <element/>

@@ -1,14 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script">
     <sys_script action="INSERT_OR_UPDATE">
         <abort_action>false</abort_action>
         <access>package_private</access>
         <action_delete>false</action_delete>
         <action_insert>true</action_insert>
+        <action_label/>
+        <action_name/>
         <action_query>false</action_query>
+        <action_run_at/>
         <action_update>true</action_update>
         <active>true</active>
         <add_message>false</add_message>
         <advanced>true</advanced>
+        <application/>
         <change_fields>false</change_fields>
         <client_callable>false</client_callable>
         <collection>x_122630_kpn_siam_supplier_request</collection>
@@ -20,9 +25,11 @@
         </filter_condition>
         <is_rest>false</is_rest>
         <message/>
-        <name>KPN Set to inactive</name>
+        <name>KPN Update Supplier Request And RITM</name>
+        <onclick/>
         <order>1000</order>
         <priority>100</priority>
+        <read_access_action>false</read_access_action>
         <rest_method/>
         <rest_method_text/>
         <rest_service/>
@@ -32,6 +39,50 @@
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
 
 	// Add your code here
+	current.work_notes = "Updated by BR - \"KPN Update Supplier Request And RITM.\" Set active to : " + current.active;
+	current.update();
+	
+	// Criteria are the same for closing the RITM..
+	var ritmId = current.requested_item.toString();
+	
+	var grRitm = new GlideRecord('sc_req_item');
+	if (grRitm.get(ritmId)) {
+		
+		// We need several updates otherwise the record won't close because of the order it manually should be processed.
+		grRitm.setValue('approval',"approved");
+		grRitm.work_notes = "Updated by BR - \"KPN Update Supplier Request And RITM.\" Set approval to : " + grRitm.approval;
+		grRitm.update();
+		
+		grRitm.setValue('state',"70");
+		grRitm.work_notes = "Updated by BR - \"KPN Update Supplier Request And RITM.\" Set state to : " + grRitm.getDisplayValue('state');
+		grRitm.update();
+		grRitm.setValue('u_closure_code',"Completed");
+		grRitm.work_notes = "Updated by BR - \"KPN Update Supplier Request And RITM.\" Set closure code to : " + grRitm.u_closure_code;
+		grRitm.setValue('close_notes',"The RITM has been closed as a result of the completion of the SIAM supplier request");
+		grRitm.update();
+		
+		// Now set the state to closed complete
+		grRitm.setValue('state',"3");
+		grRitm.work_notes = "Updated by BR - \"KPN Update Supplier Request And RITM.\" Set state to : " + grRitm.getDisplayValue('state');
+		grRitm.update();
+		
+		// Now the RITM is closed, next we need to close the REQUEST, because of NS processes
+		var reqId = grRitm.request.toString();
+		
+		var grRequest = new GlideRecord('sc_request');
+		if (grRequest.get(reqId)) {
+			
+			if (current.state == "closed_complete") {
+				grRequest.setValue('request_state', "closed_complete");
+			}
+			else {
+				grRequest.setValue('request_state', "closed_incomplete");
+			}
+			
+			grRequest.work_notes = "Updated by BR - \"KPN Update Supplier Request And RITM.\" Set request state to : " + grRequest.getDisplayValue('request_state');
+			grRequest.update();
+		}
+	}
 
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
@@ -41,18 +92,17 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>f1133c2d0f8d230093284f8ce1050e08</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_name>KPN Set to inactive</sys_name>
+        <sys_mod_count>22</sys_mod_count>
+        <sys_name>KPN Update Supplier Request And RITM</sys_name>
         <sys_overrides/>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_script_f1133c2d0f8d230093284f8ce1050e08</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-09 10:12:57</sys_updated_on>
+        <sys_updated_by>jeroen.hammega@kpn.com</sys_updated_by>
+        <sys_updated_on>2018-11-02 23:32:39</sys_updated_on>
         <template>active=false^EQ</template>
         <when>before</when>
     </sys_script>
-    <sys_translated_text action="delete_multiple" query="documentkey=f1133c2d0f8d230093284f8ce1050e08"/>
 </record_update>

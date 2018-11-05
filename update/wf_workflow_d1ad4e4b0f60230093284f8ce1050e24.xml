@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update table="wf_workflow_version">
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="wf_workflow_version">
     <wf_workflow_version action="INSERT_OR_UPDATE">
         <active>true</active>
-        <activity_stages>{"activities":{"8d395b7f0f78a30093284f8ce1050eba":"81395b7f0f78a30093284f8ce1050eb6","05395b7f0f78a30093284f8ce1050eb8":"81395b7f0f78a30093284f8ce1050eb6","41395b7f0f78a30093284f8ce1050ebc":"85395b7f0f78a30093284f8ce1050eb6"},"subflows":[],"stages":{"81395b7f0f78a30093284f8ce1050eb6":{"duration":"1 Day","order":120,"stageId":"81395b7f0f78a30093284f8ce1050eb6","name":"Fulfillment","value":"fulfillment"},"85395b7f0f78a30093284f8ce1050eb6":{"duration":"","order":1100,"stageId":"85395b7f0f78a30093284f8ce1050eb6","name":"Completed","value":"complete"}},"ends":["41395b7f0f78a30093284f8ce1050eb7"]}</activity_stages>
+        <activity_stages>{"ends":["41395b7f0f78a30093284f8ce1050eb7"],"subflows":[],"stages":{"81395b7f0f78a30093284f8ce1050eb6":{"order":120,"duration":"1 Day","stageId":"81395b7f0f78a30093284f8ce1050eb6","name":"Fulfillment","value":"fulfillment"},"85395b7f0f78a30093284f8ce1050eb6":{"order":1100,"duration":"","stageId":"85395b7f0f78a30093284f8ce1050eb6","name":"Completed","value":"complete"}},"activities":{"8d395b7f0f78a30093284f8ce1050eba":"81395b7f0f78a30093284f8ce1050eb6","05395b7f0f78a30093284f8ce1050eb8":"81395b7f0f78a30093284f8ce1050eb6","41395b7f0f78a30093284f8ce1050ebc":"85395b7f0f78a30093284f8ce1050eb6"}}</activity_stages>
         <after_business_rules>false</after_business_rules>
         <checked_out/>
         <checked_out_by/>
@@ -30,10 +31,11 @@
         <start display_value="Begin">cd395b7f0f78a30093284f8ce1050eb9</start>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 08:49:26</sys_created_on>
+        <sys_domain_path/>
         <sys_id>4d395b7f0f78a30093284f8ce1050eb3</sys_id>
-        <sys_mod_count>4</sys_mod_count>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-04 11:30:52</sys_updated_on>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_updated_by>jacco.luijt@kpn.com</sys_updated_by>
+        <sys_updated_on>2018-11-05 09:28:03</sys_updated_on>
         <table>sc_req_item</table>
         <timezone/>
         <validated>true</validated>
@@ -160,6 +162,7 @@
         <stage/>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 08:49:26</sys_created_on>
+        <sys_domain_path/>
         <sys_id>cd395b7f0f78a30093284f8ce1050eb9</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
@@ -210,6 +213,7 @@
         <stage/>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 08:49:26</sys_created_on>
+        <sys_domain_path/>
         <sys_id>41395b7f0f78a30093284f8ce1050eb7</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
@@ -239,6 +243,7 @@
         <stage display_value="Fulfillment">81395b7f0f78a30093284f8ce1050eb6</stage>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 08:49:26</sys_created_on>
+        <sys_domain_path/>
         <sys_id>8d395b7f0f78a30093284f8ce1050eba</sys_id>
         <sys_mod_count>1</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
@@ -264,7 +269,7 @@
         <sys_updated_on>2018-10-04 08:50:16</sys_updated_on>
         <value>var sendRequest = new kpnSiamReqUtils(); &#13;
 sendRequest.sendSiamRequest(current);</value>
-        <variable display_value="">c35ddef20a0a0ba96248a7090eccd518</variable>
+        <variable display_value="script">c35ddef20a0a0ba96248a7090eccd518</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>wf_activity</document>
@@ -279,7 +284,7 @@ sendRequest.sendSiamRequest(current);</value>
         <sys_updated_on>2018-10-04 08:50:16</sys_updated_on>
         <value>var sendRequest = new kpnSiamReqUtils(); &#13;
 sendRequest.sendSiamRequest(current);</value>
-        <variable display_value="">c35ddef20a0a0ba96248a7090eccd518</variable>
+        <variable display_value="script">c35ddef20a0a0ba96248a7090eccd518</variable>
     </sys_variable_value>
     <wf_condition action="INSERT_OR_UPDATE">
         <activity display_value="Send the request to the SIAM Instance">8d395b7f0f78a30093284f8ce1050eba</activity>
@@ -319,6 +324,7 @@ sendRequest.sendSiamRequest(current);</value>
         <stage display_value="Fulfillment">81395b7f0f78a30093284f8ce1050eb6</stage>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 08:49:26</sys_created_on>
+        <sys_domain_path/>
         <sys_id>05395b7f0f78a30093284f8ce1050eb8</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
@@ -343,7 +349,7 @@ sendRequest.sendSiamRequest(current);</value>
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2018-10-04 08:49:26</sys_updated_on>
         <value>state=1^stage=fulfillment^EQ</value>
-        <variable display_value="">1cb38c8f0a0a0b266fb48e08de35f507</variable>
+        <variable display_value="values">1cb38c8f0a0a0b266fb48e08de35f507</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>wf_activity</document>
@@ -357,7 +363,7 @@ sendRequest.sendSiamRequest(current);</value>
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2018-10-04 08:49:26</sys_updated_on>
         <value>state=1^stage=fulfillment^EQ</value>
-        <variable display_value="">1cb38c8f0a0a0b266fb48e08de35f507</variable>
+        <variable display_value="values">1cb38c8f0a0a0b266fb48e08de35f507</variable>
     </sys_variable_value>
     <wf_condition action="INSERT_OR_UPDATE">
         <activity display_value="Set state to Open">05395b7f0f78a30093284f8ce1050eb8</activity>
@@ -397,6 +403,7 @@ sendRequest.sendSiamRequest(current);</value>
         <stage display_value="Completed">85395b7f0f78a30093284f8ce1050eb6</stage>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 08:49:27</sys_created_on>
+        <sys_domain_path/>
         <sys_id>41395b7f0f78a30093284f8ce1050ebc</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
@@ -421,7 +428,7 @@ sendRequest.sendSiamRequest(current);</value>
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2018-10-04 08:49:27</sys_updated_on>
         <value>stateIN3,4,7^EQ</value>
-        <variable display_value="">c35dc4cd0a0a0ba96248a70990c1ac54</variable>
+        <variable display_value="wait_for_condition">c35dc4cd0a0a0ba96248a70990c1ac54</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>wf_activity</document>
@@ -437,7 +444,7 @@ sendRequest.sendSiamRequest(current);</value>
         <value>// Set the variable 'answer' to true or false to indicate if the condition has been met or not.&#13;
 answer = true;&#13;
 </value>
-        <variable display_value="">c35debce0a0a0ba96248a709440cf31a</variable>
+        <variable display_value="script_condition">c35debce0a0a0ba96248a709440cf31a</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>wf_activity</document>
@@ -451,7 +458,7 @@ answer = true;&#13;
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2018-10-04 08:49:27</sys_updated_on>
         <value>stateIN3,4,7^EQ</value>
-        <variable display_value="">c35dc4cd0a0a0ba96248a70990c1ac54</variable>
+        <variable display_value="wait_for_condition">c35dc4cd0a0a0ba96248a70990c1ac54</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>wf_activity</document>
@@ -467,7 +474,7 @@ answer = true;&#13;
         <value>// Set the variable 'answer' to true or false to indicate if the condition has been met or not.&#13;
 answer = true;&#13;
 </value>
-        <variable display_value="">c35debce0a0a0ba96248a709440cf31a</variable>
+        <variable display_value="script_condition">c35debce0a0a0ba96248a709440cf31a</variable>
     </sys_variable_value>
     <wf_condition action="INSERT_OR_UPDATE">
         <activity display_value="Wait for state Completed">41395b7f0f78a30093284f8ce1050ebc</activity>
@@ -495,6 +502,7 @@ answer = true;&#13;
         <from display_value="Send the request to the SIAM Instance">8d395b7f0f78a30093284f8ce1050eba</from>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 08:49:27</sys_created_on>
+        <sys_domain_path/>
         <sys_id>0939db7f0f78a30093284f8ce1050e1a</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
@@ -506,6 +514,7 @@ answer = true;&#13;
         <from display_value="Set state to Open">05395b7f0f78a30093284f8ce1050eb8</from>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 08:49:27</sys_created_on>
+        <sys_domain_path/>
         <sys_id>1d39db7f0f78a30093284f8ce1050e1a</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
@@ -517,6 +526,7 @@ answer = true;&#13;
         <from display_value="Wait for state Completed">41395b7f0f78a30093284f8ce1050ebc</from>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 08:49:27</sys_created_on>
+        <sys_domain_path/>
         <sys_id>9139db7f0f78a30093284f8ce1050e1b</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
@@ -528,6 +538,7 @@ answer = true;&#13;
         <from display_value="Begin">cd395b7f0f78a30093284f8ce1050eb9</from>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 08:49:27</sys_created_on>
+        <sys_domain_path/>
         <sys_id>dd39db7f0f78a30093284f8ce1050e1a</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
