@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<database>
+<?xml version="1.0" encoding="UTF-8"?><database>
     <element audit="true" label="Supplier Request" max_length="40" name="x_122630_kpn_siam_supplier_request" type="collection">
         <element default="true" label="Active" max_length="40" name="active" read_only="true" type="boolean"/>
         <element label="Error Code" max_length="8" name="error_code" type="string"/>
@@ -10,13 +9,13 @@
         <element label="Response Body" max_length="4000" name="response_body" type="string"/>
         <element choice="3" default="new" label="State" mandatory="true" max_length="40" name="state" type="choice">
             <choice>
-                <element label="Closed Cancelled" sequence="50" value="closed_cancelled"/>
-                <element label="Closed Complete" sequence="30" value="closed_complete"/>
-                <element label="Closed Incomplete" sequence="40" value="closed_incomplete"/>
-                <element label="Closed Rejected" sequence="60" value="closed_rejected"/>
-                <element label="Closed Skipped" sequence="70" value="closed_skipped"/>
-                <element label="New" sequence="10" value="new"/>
-                <element label="Work in progress" sequence="20" value="in_process"/>
+                <element inactive_on_update="false" label="New" sequence="10" value="new"/>
+                <element inactive_on_update="false" label="Work in progress" sequence="20" value="in_process"/>
+                <element inactive_on_update="false" label="Closed Complete" sequence="30" value="closed_complete"/>
+                <element inactive_on_update="false" label="Closed Incomplete" sequence="40" value="closed_incomplete"/>
+                <element inactive_on_update="false" label="Closed Cancelled" sequence="50" value="closed_cancelled"/>
+                <element inactive_on_update="false" label="Closed Rejected" sequence="60" value="closed_rejected"/>
+                <element inactive_on_update="false" label="Closed Skipped" sequence="70" value="closed_skipped"/>
             </choice>
         </element>
         <element label="Supplier Request" max_length="40" name="supplier_request" type="string"/>

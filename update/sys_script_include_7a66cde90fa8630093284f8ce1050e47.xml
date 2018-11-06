@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="sys_script_include">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
     <sys_script_include action="INSERT_OR_UPDATE">
         <access>public</access>
         <active>true</active>
@@ -161,12 +160,14 @@ kpnSiamReqUtils.prototype = {
 				// Get the full definition of the catalog item from the SIAM Instance
 				var siamItem = this._getSiamItem(element.sys_id,siamUrl);
 				log = this.su.logDebugRule("12. siamItem: "+ siamItem.name);
+				log = this.su.logDebugRule("12. siamItem: "+ JSON.stringify(siamItem));
 				
 				// and determine whether the catalog item already exists using the sys id
 				var catItemId = this._catItemExists(element.sys_id);
 				
 				if (!catItemId) {
 					log = this.su.logDebugRule("13. Create new Catalog Item " + siamItem.name + " in the customer instance");
+					log = this.su.logDebugRule("13. " + siamItem.toString());
 				
 					// Create a new catalog item using the sys_id from the SIAM instance
 					var custItemId = this._storeCatItem(siamItem,siamUrl);
@@ -289,10 +290,15 @@ kpnSiamReqUtils.prototype = {
 	},
 	
 	_storeCatItemUiPolicies: function(siamItem,siamUrl,catItemId,varArray) {
+		log = this.su.logDebugRule("13.a _storeCatItemUiPolicies");
 		// Do the same for UI Policies & their actions
 		for (var pIdx=0;pIdx < siamItem.ui_policy.length;pIdx++) {
+			log = this.su.logDebugRule("13.b ui_policy.name: "+siamItem.ui_policy[pIdx].name);
+		
 			var siamPolicySysid = siamItem.ui_policy[pIdx].sys_id;
 			var siamPolicy = this._getSiamPolicy(siamPolicySysid,siamUrl);
+			
+			log = this.su.logDebugRule("13.c siamPolicy: "+siamPolicy.name);	
 			
 			// Fill the variable in the Item_option_new table
 			var itemPolicy = new GlideRecord('catalog_ui_policy');
@@ -303,11 +309,18 @@ kpnSiamReqUtils.prototype = {
 			var itemPolicyId = itemPolicy.insert();
 			
 			if (siamItem.ui_policy[pIdx].actions) {
+				log = this.su.logDebugRule("13.d Get the Policy actions.");	
+			
 				// If actions exist for this policy
 				// store the actions for this policy
 				if (siamItem.ui_policy[pIdx].actions.length > 0) {
+					log = this.su.logDebugRule("13.e process the actions: " + pIdx);	
+			
 					for (var aIdx=0;aIdx < siamItem.ui_policy[pIdx].actions.length;aIdx++) {
-						var siamPolicyAction = siamItem.ui_policy[pIdx].actions[aIdx];
+					log = this.su.logDebugRule("13.f process the actions: " + aIdx);	
+
+						var siamPolicyAction = siamItem.ui_policy[pIdx].actions[aIdx];	
+						log = this.su.logDebugRule("13.g process the actions: " + siamPolicyAction.toString());	
 						
 						// Initialize the action
 						var itemPolicyAction = new GlideRecord('catalog_ui_policy_action');
@@ -458,11 +471,6 @@ kpnSiamReqUtils.prototype = {
 		return siamPolicy;
 	},
 	
-	_getSiamPolicyAction: function(siamActionSysId,baseUrl) {
-		var siamPolicyAction = this._getSiamObject(baseUrl,'catalog_ui_policy_action',siamActionSysId);
-		return siamPolicyAction;
-	},
-	
 	_getSiamScript: function(siamScriptSysId,baseUrl) {
 		var siamScript = this._getSiamObject(baseUrl,'catalog_script_client',siamScriptSysId);
 		return siamScript;
@@ -582,15 +590,18 @@ kpnSiamReqUtils.prototype = {
 	},
 	
 	_fillPolicyAction: function(itemPolicyAction,catItemId,uiPolicyId,siamPolicyAction,varArray) {
+		log = this.su.logDebugRule("13.x _fillPolicyAction");	
 		// Link to the Catalog Item
 		itemPolicyAction.catalog_item = catItemId;
 		// Link to the Catalog UI Policy
 		itemPolicyAction.ui_policy = uiPolicyId;
-		var siamVarId = siamPolicyAction.catalog_variable.replace("IO:", "");
+		var siamVarId = siamPolicyAction.name.replace("IO:", "");
 		
 		var varId;
 		for (var i = 0; i < varArray.length; i++) {
+			log = this.su.logDebugRule("13.y zoek voor "+siamVarId+" in "+varArray[i].siamId);
 			if (varArray[i].siamId == siamVarId) {
+				log = this.su.logDebugRule("13.z gevonden! ");
 				varId = varArray[i].custId;
 				break;
 			}
@@ -600,6 +611,7 @@ kpnSiamReqUtils.prototype = {
 		itemPolicyAction.mandatory = siamPolicyAction.mandatory;
 		itemPolicyAction.visible = siamPolicyAction.visible;
 		itemPolicyAction.disabled = siamPolicyAction.disabled;
+		itemPolicyAction.cleared = siamPolicyAction.cleared;
 		
 		return itemPolicyAction;
 	},
@@ -641,14 +653,14 @@ kpnSiamReqUtils.prototype = {
         <sys_created_on>2018-09-14 12:20:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>7a66cde90fa8630093284f8ce1050e47</sys_id>
-        <sys_mod_count>215</sys_mod_count>
+        <sys_mod_count>224</sys_mod_count>
         <sys_name>kpnSiamReqUtils</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy>read</sys_policy>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_script_include_7a66cde90fa8630093284f8ce1050e47</sys_update_name>
-        <sys_updated_by>jacco.luijt@kpn.com</sys_updated_by>
-        <sys_updated_on>2018-11-05 08:50:19</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-11-06 12:21:03</sys_updated_on>
     </sys_script_include>
 </record_update>

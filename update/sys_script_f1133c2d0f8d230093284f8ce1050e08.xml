@@ -1,19 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update sys_domain="global" table="sys_script">
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
     <sys_script action="INSERT_OR_UPDATE">
         <abort_action>false</abort_action>
         <access>package_private</access>
         <action_delete>false</action_delete>
         <action_insert>true</action_insert>
-        <action_label/>
-        <action_name/>
         <action_query>false</action_query>
-        <action_run_at/>
         <action_update>true</action_update>
         <active>true</active>
         <add_message>false</add_message>
         <advanced>true</advanced>
-        <application/>
         <change_fields>false</change_fields>
         <client_callable>false</client_callable>
         <collection>x_122630_kpn_siam_supplier_request</collection>
@@ -26,10 +21,8 @@
         <is_rest>false</is_rest>
         <message/>
         <name>KPN Update Supplier Request And RITM</name>
-        <onclick/>
         <order>1000</order>
         <priority>100</priority>
-        <read_access_action>false</read_access_action>
         <rest_method/>
         <rest_method_text/>
         <rest_service/>
@@ -105,4 +98,5 @@
         <template>active=false^EQ</template>
         <when>before</when>
     </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=f1133c2d0f8d230093284f8ce1050e08"/>
 </record_update>

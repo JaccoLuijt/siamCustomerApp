@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="question_choice">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
     <question_choice action="INSERT_OR_UPDATE">
-        <misc>1250</misc>
+        <misc>1447.75</misc>
         <order>1</order>
         <question display_value="Please make your choice">0d7abcd30fbc230093284f8ce1050ee7</question>
-        <rec_misc>500</rec_misc>
+        <rec_misc>579.1</rec_misc>
         <sys_class_name>question_choice</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-02 07:58:53</sys_created_on>

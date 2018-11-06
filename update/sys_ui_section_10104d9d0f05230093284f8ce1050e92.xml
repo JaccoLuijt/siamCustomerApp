@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update>
+<?xml version="1.0" encoding="UTF-8"?><record_update>
     <sys_ui_section caption="" section_id="10104d9d0f05230093284f8ce1050e92" sys_domain="global" table="x_122630_kpn_siam_supplier_request" version="3" view="">
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>number</element>

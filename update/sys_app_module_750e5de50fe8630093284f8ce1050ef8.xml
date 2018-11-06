@@ -1,16 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update sys_domain="global" table="sys_app_module">
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
     <sys_app_module action="INSERT_OR_UPDATE">
         <active>true</active>
         <application display_value="SIAM Service Catalog">44f4d1e50fe8630093284f8ce1050e2e</application>
         <assessment/>
         <content_page/>
         <device_type/>
-        <filter table="sc_cat_item">category=2d36d00cdbcdef80852a789e3b961948^EQ<item display_table="sc_category" display_value="KPN Automated Catalog Items" endquery="false" field="category" goto="false" newquery="false" operator="=" or="false" value="2d36d00cdbcdef80852a789e3b961948"/>
+        <filter table="sc_cat_item">category=2d36d00cdbcdef80852a789e3b961948^EQ<item endquery="false" field="category" goto="false" newquery="false" operator="=" or="false" value="2d36d00cdbcdef80852a789e3b961948"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </filter>
-        <help_hint/>
-        <help_link/>
         <hint/>
         <homepage/>
         <image/>
@@ -21,7 +18,6 @@
         <name>sc_cat_item</name>
         <order>300</order>
         <override_menu_roles>false</override_menu_roles>
-        <populate_view/>
         <query/>
         <report/>
         <roles/>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="sc_category">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_category">
     <sc_category action="INSERT_OR_UPDATE">
         <active>true</active>
         <description/>
@@ -34,6 +33,6 @@
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2018-09-18 06:46:44</sys_updated_on>
         <title>KPN SIAM Automated Request</title>
-        <u_vra_uid/>
     </sc_category>
+    <sys_translated_text action="delete_multiple" query="documentkey=b73061ed0fe8630093284f8ce1050e07"/>
 </record_update>

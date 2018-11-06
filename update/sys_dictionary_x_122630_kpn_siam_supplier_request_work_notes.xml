@@ -1,17 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update>
+<?xml version="1.0" encoding="UTF-8"?><record_update>
     <sys_dictionary action="INSERT_OR_UPDATE" element="work_notes" table="x_122630_kpn_siam_supplier_request">
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
         <attributes/>
         <audit>false</audit>
-        <calculation>(function calculatedFieldValue(current) {&#13;
-&#13;
-	// Add your code here&#13;
-	return '';  // return the calculated value&#13;
-&#13;
-})(current);</calculation>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
         <choice/>
         <choice_field/>
         <choice_table/>
@@ -31,6 +30,8 @@
         <element>work_notes</element>
         <element_reference>false</element_reference>
         <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
         <internal_type display_value="Journal">journal</internal_type>
         <mandatory>false</mandatory>
         <max_length>4000</max_length>
@@ -53,16 +54,16 @@
         <sys_created_by>jacco.luijt@kpn.com</sys_created_by>
         <sys_created_on>2018-10-31 07:56:49</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>12ffca28dbad2f04852a789e3b9619ea</sys_id>
+        <sys_id>710089960f21230093284f8ce1050e43</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>work_notes</sys_name>
+        <sys_name>Work Notes</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_dictionary_x_122630_kpn_siam_supplier_request_work_notes</sys_update_name>
-        <sys_updated_by>jacco.luijt@kpn.com</sys_updated_by>
-        <sys_updated_on>2018-10-31 07:56:49</sys_updated_on>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2018-11-05 12:36:29</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

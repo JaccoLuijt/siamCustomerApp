@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update sys_domain="global" table="sys_app_module">
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
     <sys_app_module action="INSERT_OR_UPDATE">
         <active>true</active>
         <application display_value="SIAM Service Catalog">44f4d1e50fe8630093284f8ce1050e2e</application>
@@ -7,8 +6,6 @@
         <content_page/>
         <device_type/>
         <filter/>
-        <help_hint/>
-        <help_link/>
         <hint/>
         <homepage/>
         <image/>
@@ -19,7 +16,6 @@
         <name>syslog_app_scope</name>
         <order>400</order>
         <override_menu_roles>false</override_menu_roles>
-        <populate_view/>
         <query>sys_created_onONToday@javascript:gs.daysAgoStart(0)@javascript:gs.daysAgoEnd(0)^sourceSTARTSWITHx_122630_kpn_siam</query>
         <report/>
         <roles>x_122630_kpn_siam.SIAM_Admin,x_122630_kpn_siam.SIAM_User</roles>
