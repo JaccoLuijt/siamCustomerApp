@@ -297,13 +297,12 @@ kpnSiamReqUtils.prototype = {
 		
 			var siamPolicySysid = siamItem.ui_policy[pIdx].sys_id;
 			var siamPolicy = this._getSiamPolicy(siamPolicySysid,siamUrl);
-			
 			log = this.su.logDebugRule("13.c siamPolicy: "+siamPolicy.name);	
 			
 			// Fill the variable in the Item_option_new table
 			var itemPolicy = new GlideRecord('catalog_ui_policy');
 			itemPolicy.initialize();
-			itemPolicy = this._fillPolicy(itemPolicy,catItemId,siamPolicy);
+			itemPolicy = this._fillPolicy(itemPolicy,catItemId,siamPolicy,varArray);
 			
 			// Store the information
 			var itemPolicyId = itemPolicy.insert();
@@ -569,7 +568,7 @@ kpnSiamReqUtils.prototype = {
 		return itemVarChoice;
 	},
 	
-	_fillPolicy: function(itemPolicy,catItemId,siamPolicy) {
+	_fillPolicy: function(itemPolicy,catItemId,siamPolicy,varArray) {
 		// Link to the Catalog Item
 		itemPolicy.catalog_item = catItemId;
 		
@@ -583,7 +582,13 @@ kpnSiamReqUtils.prototype = {
 		// Catalog condition contain references to the fields. 
 		// These should be replaced by the new references
 		itemPolicy.catalog_conditions = siamPolicy.catalog_conditions;
-				log = this.su.logDebugRule("13.x _fillPolicyAction");	
+		log = this.su.logDebugRule("13.u _fillPolicy "+itemPolicy.short_description+", condition: <"+itemPolicy.catalog_conditions+">");	
+		// Modify the condition so the correct fields are used in this condition
+		for (var i = 0; i < varArray.length; i++) {
+			itemPolicy.catalog_conditions = itemPolicy.catalog_conditions.replace(varArray[i].siamId, varArray[i].custId);
+		}
+		log = this.su.logDebugRule("13.u _fillPolicy "+itemPolicy.short_description+", replaced : <"+itemPolicy.catalog_conditions+">");	
+		
 		itemPolicy.on_load = siamPolicy.on_load;
 		itemPolicy.run_scripts = siamPolicy.run_scripts;
 		itemPolicy.active = siamPolicy.active;
@@ -594,7 +599,6 @@ kpnSiamReqUtils.prototype = {
 	},
 	
 	_fillPolicyAction: function(itemPolicyAction,catItemId,uiPolicyId,siamPolicyAction,varArray) {
-		log = this.su.logDebugRule("13.x _fillPolicyAction");	
 		// Link to the Catalog Item
 		itemPolicyAction.catalog_item = catItemId;
 		// Link to the Catalog UI Policy
@@ -603,9 +607,7 @@ kpnSiamReqUtils.prototype = {
 		
 		var varId;
 		for (var i = 0; i < varArray.length; i++) {
-			log = this.su.logDebugRule("13.y zoek voor "+siamVarId+" in "+varArray[i].siamId);
 			if (varArray[i].siamId == siamVarId) {
-				log = this.su.logDebugRule("13.z gevonden! ");
 				varId = varArray[i].custId;
 				break;
 			}
@@ -657,7 +659,7 @@ kpnSiamReqUtils.prototype = {
         <sys_created_on>2018-09-14 12:20:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>7a66cde90fa8630093284f8ce1050e47</sys_id>
-        <sys_mod_count>225</sys_mod_count>
+        <sys_mod_count>230</sys_mod_count>
         <sys_name>kpnSiamReqUtils</sys_name>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy>read</sys_policy>
@@ -665,6 +667,6 @@ kpnSiamReqUtils.prototype = {
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_script_include_7a66cde90fa8630093284f8ce1050e47</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-11-06 13:38:35</sys_updated_on>
+        <sys_updated_on>2018-11-06 14:54:29</sys_updated_on>
     </sys_script_include>
 </record_update>
