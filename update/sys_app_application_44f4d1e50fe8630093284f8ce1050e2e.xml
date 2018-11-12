@@ -15,8 +15,8 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>44f4d1e50fe8630093284f8ce1050e2e</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>SIAM Service Catalog</sys_name>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>KPN Service Catalog</sys_name>
         <sys_overrides/>
         <sys_package display_value="KPN SIAM Service" source="x_122630_kpn_siam">5ce404e10f64630093284f8ce1050e45</sys_package>
         <sys_policy/>
@@ -24,8 +24,8 @@
         <sys_scope display_value="KPN SIAM Service">5ce404e10f64630093284f8ce1050e45</sys_scope>
         <sys_update_name>sys_app_application_44f4d1e50fe8630093284f8ce1050e2e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-14 13:10:13</sys_updated_on>
-        <title>SIAM Service Catalog</title>
+        <sys_updated_on>2018-11-12 08:35:57</sys_updated_on>
+        <title>KPN Service Catalog</title>
         <view_name/>
     </sys_app_application>
 </record_update>
